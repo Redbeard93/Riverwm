@@ -3,7 +3,11 @@
 ## Archlinux init
 1. Install river & dependencies:
 
-`sudo pacman -S river zig libxkbcommon wayland wayland-protocols wlroots libevdev pixman pkg-config scdoc otf-font-awesome`
+`sudo pacman -S river zig libxkbcommon wayland wayland-protocols wlroots libevdev pixman pkg-config scdoc `
+
+Install decorations & gadgets
+
+`otf-font-awesome waybar wofi swaybg swaylock grim slurp wf-recorder kitty python-pillow dunst`
 
 2. Change keyboard layout:
 
