@@ -1,8 +1,8 @@
 #!/bin/bash
 
-MUTEX="${HOME}/.config/lock/river-lock"
-LOG="${HOME}/.config/lock/lock-log"
-NOLOCK="${HOME}/.config/lock/NOLOCK"
+MUTEX="${HOME}/tmp/river-lock"
+LOG="${HOME}/tmp/lock-log"
+NOLOCK="${HOME}/tmp/lock/NOLOCK"
 
 img=$(find ${HOME}/.config/river/backgrounds -type f | shuf -n 1)
 
