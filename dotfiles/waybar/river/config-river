@@ -71,7 +71,10 @@
         "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
         "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname} {ipaddr}"
+        "tooltip-format": "{ifname} {ipaddr}",
+	"format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
 	"on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
     },
     "temperature": {
