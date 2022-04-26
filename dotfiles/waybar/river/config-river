@@ -104,13 +104,13 @@
     },
     "custom/launcher":{
         "format": "",
-	"tooltip": false
+	"tooltip": false,
         "on-click": "wofi --show drun",
         "on-click-right": "killall wofi"
     },
     "custom/power":{
         "format": "",
-	"tooltip": false
+	"tooltip": false,
         "on-click": "bash ~/.config/wofi/leave/leave.sh",
         "on-click-right": "killall wofi"
     },
@@ -123,7 +123,7 @@
     },
     "custom/wallpaper":{
         "format":"",
-	"tooltip": false
+	"tooltip": false,
         "on-click": "bash ~/.config/system_scripts/pkill_bc"
     }
 }
