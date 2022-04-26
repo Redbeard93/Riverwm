@@ -72,6 +72,7 @@
         "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
         "tooltip-format": "{ifname} {ipaddr}"
+	"on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
     },
     "temperature": {
         // "thermal-zone": 2,
