@@ -13,7 +13,7 @@
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND _DISPLAY XDG_CURRENT_DESKTOP=river"
 
 # launcher
-riverctl map normal Super D spawn "wofi --show drun"
+riverctl map normal Super D spawn "wofi --show drun --prompt launcher"
 
 # ranger
 riverctl map normal Super+Shift f spawn "kitty --class ranger -e ranger"
