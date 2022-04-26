@@ -75,7 +75,7 @@
 	"format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
-	"on-click-right": "bash ~/.config/wofi/wifi_menu/rofi_wifi_menu"
+	//"on-click-right": "bash ~/.config/wofi/wifi_menu/rofi_wifi_menu"
     },
     "temperature": {
         // "thermal-zone": 2,
