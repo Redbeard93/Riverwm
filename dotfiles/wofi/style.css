@@ -28,18 +28,16 @@ window {
     border-radius: 10px;
 }
 
-#selected {
-    border-radius:8px 8px 8px 8px;
-    font-size: 28px;
-    background-color: #9E619E;
-}
-
 #entry {
     padding: 0px;
     margin: 0px;
     background-color: #1E1D2F;
 }
 
+#entry:selected {
+    border-radius:3px 3px 3px 3px;
+    background-color: #9E619E;
+}
 #scroll {
     margin: 5px;
     background-color: #1E1D2F;
