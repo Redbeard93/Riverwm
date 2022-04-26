@@ -45,7 +45,7 @@
 	},
     "clock": {
         "interval": 1,
-        "format": "{: %H %M %S   %e %b %Y}",
+        "format": "{: %H %M %S   %e %b %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     },
     "cpu": {
