@@ -31,7 +31,7 @@ riverctl map normal Super+Shift Return spawn kitty
 riverctl map normal Super+Shift Q close
 
 # manual syslock
-riverctl map normal Super+Shift X spawn "swaylock -F -l -i $(find ${HOME}/.config/river/backgrounds -type f | shuf -n 5)"
+riverctl map normal Super+Shift X spawn "bash ~/.config/system_scripts/wayland_session_lock"
 
 # Super+Shift+E to exit river
 riverctl map normal Super+Shift E spawn "bash ~/.config/wofi/leave/leave.sh"
