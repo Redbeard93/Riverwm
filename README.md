@@ -7,7 +7,7 @@
 
 Install decorations & gadgets
 
-`otf-font-awesome waybar wofi swaybg swaylock grim slurp wf-recorder kitty python-pillow dunst`
+`otf-font-awesome waybar wofi swaybg swayidle swaylock grim slurp wf-recorder kitty python-pillow dunst`
 
 2. Change keyboard layout:
 
