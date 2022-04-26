@@ -1,8 +1,8 @@
 {
 	"layer": "top",
-	"modules-left": ["custom/launcher","temperature","cpu","memory","network","tray"],
+	"modules-left": ["custom/power","temperature","cpu","memory","network","tray"],
 	"modules-center": ["river/tags"],
-	"modules-right": ["custom/wallpaper","custom/alsa","clock","custom/power"],
+	"modules-right": ["custom/wallpaper","custom/alsa","clock","custom/launcher"],
 
     "custom/alsa": {
         "exec": "amixer get Master | sed -nre 's/.*\\[off\\].*/ /p; s/.*\\[(.*%)\\].*/ \\1/p'",
