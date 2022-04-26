@@ -158,14 +158,14 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	background: #B5E8E0;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
 }
 
 #battery.charging, #battery.plugged {
 	color: #161320;
-    background-color: #B5E8E0;
+        background-color: #B5E8E0;
 }
 
 #battery.critical:not(.charging) {
@@ -213,21 +213,29 @@ window#waybar.hidden {
 	transition: none;
 	color: #161320;
 	background: #DDB6F2;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+}
+
+#memory.warning {
+    color: orange;
+    background: #DDB6F2;
+    animation-name: blink-warning;
+    animation-duration: 2s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-#memory.warning {
-    color: orange;
-	background: #DDB6F2;
-}
-
 #memory.critical {
     color: red;
-	background: #DDB6F2;
+    background: #DDB6F2;
     animation-name: blink-critical;
     animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #cpu {
