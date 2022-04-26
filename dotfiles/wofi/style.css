@@ -1,6 +1,6 @@
 window {
     opacity: 0.9;
-    border: 0px;
+    border: none;
     border-radius: 10px;
     font-family: monospace;
     font-size: 20px;
@@ -8,9 +8,9 @@ window {
 
 #input {
     border-radius: 3px;
-    border: 0px;
+    border: none;
     padding: 10px;
-    margin: 0px;
+    margin: none;
     color: #9D619D;
     background-color: #1E1D2F;
 }
