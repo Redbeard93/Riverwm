@@ -3,7 +3,7 @@
 ## Archlinux init
 1. Install river & dependencies:
 
-`sudo pacman -S river zig libxkbcommon wayland wayland-protocols wlroots libevdev pixman pkg-config scdoc `
+`sudo pacman -S river zig libxkbcommon wayland wayland-protocols wlroots libevdev pixman pkg-config scdoc alsa-utils`
 
 Install decorations & gadgets
 
