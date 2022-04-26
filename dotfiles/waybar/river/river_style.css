@@ -11,7 +11,7 @@
 
 @keyframes blink-warning {
     70% {
-        color: #161320;
+        color: orange;
     }
 
     to {
