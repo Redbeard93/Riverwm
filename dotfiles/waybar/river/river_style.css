@@ -129,7 +129,7 @@ window#waybar.hidden {
 	border-radius: 10px;
 	transition: none;
 	color: #161320;
-	background: #9D9D61;
+	background: #bd93f9;
 }
 
 #temperature.critical {
