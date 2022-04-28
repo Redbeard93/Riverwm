@@ -7,7 +7,7 @@
 
 Install decorations & gadgets
 
-`otf-font-awesome waybar wofi rofi swaybg swayidle swaylock grim slurp wf-recorder kitty python-pillow dunst networkmanager network-manager-applet`
+`otf-font-awesome waybar wofi rofi swaybg swayidle swaylock grim slurp wf-recorder kitty python-pillow dunst iw networkmanager network-manager-applet wl-clipboard(for neovim clipboard) fd ripgrep`
 
 2. Change keyboard layout:
 
