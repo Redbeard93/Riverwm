@@ -70,3 +70,4 @@ XKB_DEFAULT_OPTIONS=ctrl:swapcaps
 > To permanently unset a variable you stored in a file, go to the file, and remove the line containing the variable definition.
 
 3. put 'river' at the bottom of `~/.bash_profile`
+4. git clone all files from this repo & put them under `$HOME/.config/`
