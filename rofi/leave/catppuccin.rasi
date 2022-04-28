@@ -1,0 +1,14 @@
+* {
+    bg-col:  transparent;//#1E1D2F;
+    bg-col-light: #1E1D2F;
+    border-col: #1E1D2F;
+    selected-col: transparent;//#1E1D2F;
+    blue: #7aa2f7;
+    fg-col: #7F7F7F;
+    fg-col2: #F28FAD;
+    grey: #D9E0EE;
+    width: 53%;
+    height: 33%;
+    location: center;
+    border-radius: 3px;
+}

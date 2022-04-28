@@ -1,0 +1,99 @@
+configuration {
+  terminal:"kitty";
+ // modi: "run,drun";
+  font: "Fira Code Nerd Font Mono 14";
+  display-drun: "apps";
+  display-run: "run";
+  drun-display-format: "{name}";
+  icon-theme: "Papirus-Dark";
+  show-icons: false;
+  hide-scrollbar: true;
+  disable-history: false;
+  sidebar-mode: false;
+}
+
+@theme "/dev/null"
+
+* {
+  bg: #1e1d2f;
+  fg: #D9E0EE;
+  button: #282c34;
+  background-color: @bg;
+  text-color: @fg;
+}
+
+window {
+  transparency: "real";
+  width: 53%;
+  height: 33%;
+  border-radius: 9px;
+}
+
+prompt { enabled: false; }
+
+entry {
+  placeholder: "Search";
+  placeholder-color: #7F7F7F;
+  expand: true;
+  padding: 1.5%;
+  border-radius: 0px;
+}
+
+inputbar {
+  children: [ entry ];
+  expand: false;
+  border-radius: 0px 0 0px 0px;
+}
+
+listview {
+  columns: 2;
+  lines: 5;
+  cycle: true;
+  dynamic: true;
+  layout: vertical;
+  padding: 20px 20px 20px 20px;
+}
+
+mainbox {
+  border-radius: 25px;
+  children: [ inputbar, listview ];
+}
+
+element {
+  orientation: vertical;
+  //padding: 1.5% 0% 1.5% 0%;
+  border-radius: 0px;
+}
+element-icon {
+  size: 25px;
+}
+element-text {
+  expand: true;
+  vertical-align: 0.5;
+  horizontal-align: 0.5;
+  margin: 0.6% 0.6% 0% 0.6%;
+  background-color: inherit;
+  text-color: inherit;
+}
+
+element selected {
+  text-color: #F28FAD;
+  background-color: @button;
+  border-radius: 0px;
+}
+mode-switcher {
+  spacing: 0;
+}
+
+button {
+  padding: 10px;
+  background-color: #1E1D2F;
+  text-color: @fg;
+  vertical-align: 0.5;
+  horizontal-align: 0.5;
+}
+
+button selected {
+  background-color: #1E1D2F;
+  text-color: #7aa2f7;
+}
