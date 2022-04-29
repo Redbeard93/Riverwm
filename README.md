@@ -69,5 +69,12 @@ XKB_DEFAULT_OPTIONS=ctrl:swapcaps
 >
 > To permanently unset a variable you stored in a file, go to the file, and remove the line containing the variable definition.
 
-3. put 'river' at the bottom of `~/.bash_profile`
-4. git clone all files from this repo & put them under `$HOME/.config/`
+3. if you don`t have seatd & rely on logind(which is with linux by default) put this under /etc/environment 
+
+check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-could-not-connect-to-socket-run-seatd-sock-no-su
+
+`LIBSEAT_BACKEND=logind`
+
+4. put 'river' at the bottom of `~/.bash_profile`
+
+5. git clone all files from this repo & put them under `$HOME/.config/`
