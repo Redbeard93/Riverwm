@@ -78,3 +78,5 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 4. put 'river' at the bottom of `~/.bash_profile`
 
 5. git clone all files from this repo & put them under `$HOME/.config/`
+
+6. for IME, I use `fcitx5-im fcitx5-rime glfw-wayland`
