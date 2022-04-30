@@ -5,10 +5,10 @@
 	"modules-right": ["custom/wallpaper","custom/alsa","clock","custom/launcher"],
 
     "custom/alsa": {
-        "exec": "amixer get Master | sed -nre 's/.*\\[off\\].*/ /p; s/.*\\[(.*%)\\].*/ \\1/p'",
-        "on-click": "amixer set Master toggle; pkill -x -RTMIN+11 waybar",
-        "on-scroll-up": "amixer set Master 1+; pkill -x -RTMIN+11 waybar",
-        "on-scroll-down": "amixer set Master 1-; pkill -x -RTMIN+11 waybar",
+        "exec": "amixer get PCM | sed -nre 's/.*\\[off\\].*/ /p; s/.*\\[(.*%)\\].*/ \\1/p'",
+        "on-click": "amixer set PCM toggle; pkill -x -RTMIN+11 waybar",
+        "on-scroll-up": "amixer set PCM 1+; pkill -x -RTMIN+11 waybar",
+        "on-scroll-down": "amixer set PCM 1-; pkill -x -RTMIN+11 waybar",
         "signal": 11,
         "interval": 1,
         "tooltip": false,
