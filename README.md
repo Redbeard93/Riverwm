@@ -80,3 +80,5 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 5. git clone all files from this repo & put them under `$HOME/.config/`
 
 6. for IME, I use `fcitx5-im fcitx5-rime glfw-wayland`
+
+7. To make  haikarainen/light work without sudo, add user to a secondary group----video group `sudo usermod -a -G video user`
