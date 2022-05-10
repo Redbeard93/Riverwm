@@ -7,7 +7,7 @@
 
 Install decorations & gadgets
 
-`otf-font-awesome(for waybar icons) otf-fira-code-nerd-font(for powermenu and nvim icons) waybar wofi rofi-lbonn-wayland-git swaybg swayidle swaylock grim slurp wf-recorder kitty python-pillow dunst iw networkmanager network-manager-applet wl-clipboard(for neovim clipboard) fd ripgrep`
+`otf-font-awesome(for waybar icons) otf-fira-code-nerd-font(for powermenu and nvim icons) waybar wofi rofi-lbonn-wayland-git swaybg swayidle swaylock grim slurp wf-recorder kitty python-pillow dunst iw networkmanager network-manager-applet wl-clipboard(for neovim clipboard) fd ripgrep zathura zathura-pdf-mupdf(PDF viewer)`
 
 2. Change keyboard layout:
 
