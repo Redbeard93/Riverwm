@@ -160,9 +160,13 @@ do
     #riverctl map $mode Mod1 XF86AudioLowerVolume  spawn 'pamixer -d 5'
     #riverctl map $mode Mod1 XF86AudioMute         spawn 'pamixer --toggle-mute'
 
-    riverctl map $mode Mod1 X  spawn 'amixer set PCM 5%+ && pkill -x -RTMIN+11 waybar'
-    riverctl map $mode Mod1 K  spawn 'amixer set PCM 5%- && pkill -x -RTMIN+11 waybar'
-    riverctl map $mode Mod1 Y  spawn 'amixer set PCM toggle && pkill -x -RTMIN+11 waybar'
+    #riverctl map $mode Mod1 X  spawn 'amixer set PCM 5%+ && pkill -x -RTMIN+11 waybar'
+    #riverctl map $mode Mod1 K  spawn 'amixer set PCM 5%- && pkill -x -RTMIN+11 waybar'
+    #riverctl map $mode Mod1 Y  spawn 'amixer set PCM toggle && pkill -x -RTMIN+11 waybar'
+    
+    riverctl map $mode Mod1 X  spawn 'pactl set-sink-volume 0 +5%'
+    riverctl map $mode Mod1 K  spawn 'pactl set-sink-volume 0 -5%'
+    riverctl map $mode Mod1 Y  spawn 'pactl set-sink-mute 0 toggle'
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
