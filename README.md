@@ -82,3 +82,5 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 6. for IME, I use `fcitx5-im fcitx5-rime glfw-wayland`
 
 7. To make  haikarainen/light work without sudo, add user to a secondary group----video group `sudo usermod -a -G video user`
+
+8. To use bluetooth Headset, install `pulseaudio pulseaudio-alsa pulseaudio-bluetooth bluez bluez-utils pavucontrol`  
