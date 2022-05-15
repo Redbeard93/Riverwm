@@ -2,7 +2,25 @@
 	"layer": "top",
 	"modules-left": ["custom/power","temperature","cpu","memory","network","tray"],
 	"modules-center": ["river/tags"],
-	"modules-right": ["custom/wallpaper","custom/alsa","clock","custom/launcher"],
+	"modules-right": ["custom/wallpaper","pulseaudio","clock","custom/launcher"],
+
+        "pulseaudio": {
+            "format": "{volume}% {icon}",
+            "format-bluetooth": "{volume}% {icon}",
+            "format-muted": "",
+            "format-icons": {
+                "headphone": "",
+                "hands-free": "",
+                "headset": "",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": ["", ""]
+            },
+            "scroll-step": 1,
+            "on-click": "pavucontrol",
+            "on-click-right": "pactl set-sink-mute 0 toggle"
+        },
 
     "custom/alsa": {
         "exec": "amixer get PCM | sed -nre 's/.*\\[off\\].*/ /p; s/.*\\[(.*%)\\].*/ \\1/p'",
