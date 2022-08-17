@@ -85,4 +85,4 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 
 8. To use bluetooth Headset, install `pipewire pipewire-alsa pipewire-pulse bluez bluez-utils pavucontrol pamixer`  
 
-9. To make vbetool work without sudo`s password, add `ALL ALL=(ALL) NOPASSWD:/usr/bin/vbetool` at the bottom line of `/etc/sudoers`
+9. To make vbetool work without sudo password, add `ALL ALL=(ALL) NOPASSWD:/usr/bin/vbetool` at the bottom line of `/etc/sudoers`
