@@ -12,9 +12,6 @@
 
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND _DISPLAY XDG_CURRENT_DESKTOP=river"
 
-# dpms for thinkpad x220 keyboard shortcut
-riverctl map normal None 0x1008ff59 spawn "bash ~/.config/system_scripts/displaymanager.sh"
-
 # key 'Super + Pause' for monitor lcd off 
 riverctl map normal Super 0xff13 spawn "sudo vbetool dpms off; sed -i '2c a=0' ~/.config/system_scripts/displaymanager.sh"
 
