@@ -9,9 +9,10 @@ hibernate="鈴hibernate"
 logout="﫼"
 
 # Variable passed to rofi
-choice=$(printf "$shutdown\n$reboot\n$lock\n$logout\n$suspend" | rofi -dmenu -theme $HOME/.config/rofi/leave/logmenu.rasi)
-if [[ $choice == "$lock" ]];then
-    bash ~/.config/system_scripts/wayland_session_lock
+choice=$(printf "$shutdown\n$reboot\n$logout\n$suspend\n$hibernate" | rofi -dmenu -theme $HOME/.config/rofi/leave/logmenu.rasi)
+if [[ $choice == "$hibernate" ]];then
+    systemctl hibernate
+    #bash ~/.config/system_scripts/wayland_session_lock
 elif [[ $choice == "$logout" ]];then
     pkill -KILL -u "$USER"
 elif [[ $choice == "$suspend" ]];then
