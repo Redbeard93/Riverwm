@@ -5,5 +5,7 @@ killall -q polkit-gnome-authentication-agent-1 waybar dunst
 waybar -c ~/.config/waybar/river/config-river -s ~/.config/waybar/river/river_style.css &
 dunst -config ~/.config/dunst/dunstrc &
 sh ~/.config/system_scripts/pkill_bc &
-swayidle -w timeout 900 ~/.config/system_scripts/wayland_session_lock &
+# swayidle -w timeout 900 ~/.config/system_scripts/wayland_session_lock &
+swayidle -w timeout 1800 'sudo vbetool dpms off' &
+
 fcitx5 &
