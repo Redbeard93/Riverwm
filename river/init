@@ -13,10 +13,10 @@
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND _DISPLAY XDG_CURRENT_DESKTOP=river"
 
 # key 'Super + Pause' for monitor lcd off 
-riverctl map normal Super 0xff13 spawn "sudo vbetool dpms off; sed -i '2c a=0' ~/.config/system_scripts/displaymanager.sh"
+riverctl map normal Super Pause spawn "sudo vbetool dpms off; sed -i '2c a=0' ~/.config/system_scripts/displaymanager.sh"
 
 # key 'Pause' for monitor lcd on
-riverctl map normal None 0xff13 spawn "sudo vbetool dpms on; sed -i '2c a=1' ~/.config/system_scripts/displaymanager.sh"
+riverctl map normal None Pause spawn "sudo vbetool dpms on; sed -i '2c a=1' ~/.config/system_scripts/displaymanager.sh"
 
 # launcher
 riverctl map normal Super D spawn "rofi -show drun"
