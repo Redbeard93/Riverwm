@@ -6,6 +6,6 @@ waybar -c ~/.config/waybar/river/config-river -s ~/.config/waybar/river/river_st
 dunst -config ~/.config/dunst/dunstrc &
 sh ~/.config/system_scripts/pkill_bc &
 # swayidle -w timeout 900 ~/.config/system_scripts/wayland_session_lock &
-swayidle -w timeout 1800 'sudo vbetool dpms off' &
-
+swayidle -w\
+    timeout 1800 'sudo vbetool dpms off; sed -i "2c a=0" ~/.config/system_scripts/displaymanager.sh' &
 fcitx5 &
