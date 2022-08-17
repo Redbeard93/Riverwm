@@ -86,3 +86,16 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 8. To use bluetooth Headset, install `pipewire pipewire-alsa pipewire-pulse bluez bluez-utils pavucontrol pamixer`  
 
 9. To make vbetool work without sudo password, add `ALL ALL=(ALL) NOPASSWD:/usr/bin/vbetool` at the bottom line of `/etc/sudoers`
+
+10. Hibernate settings(for example)
+
+firstly, add `options resume=/dev/sdiJ`(wherever your swap disk is) in your (for example) systemd-boot bootloader such as 
+`/boot/loader/entries/arch.conf`, then， configure the initramfs, add `resume` in `HOOKS=(base udev autodetect keyboard modconf block filesystems fsck)` somewhere behind udev (mandatory), then run `sudo mkinitcpio -p`
+
+(https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) 
+
+(https://www.reddit.com/r/archlinux/comments/anki3y/hibernation_using_systemdbootbootctl/)
+
+(https://wiki.archlinux.org/title/systemd-boot#Loader_configuration)
+
+(https://www.cnblogs.com/sztom/p/10612593.html)
