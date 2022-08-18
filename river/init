@@ -12,8 +12,10 @@
 
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND _DISPLAY XDG_CURRENT_DESKTOP=river"
 
-# dpms for thinkpad x220 keyboard shortcut
+# hide & reload waybar
+riverctl map normal Super B spawn "bash ~/.config/system_scripts/hideWayBar.sh"
 
+# dpms for thinkpad x220 keyboard shortcut
 riverctl map normal None 0x1008ff2d spawn "bash ~/.config/system_scripts/displaymanager.sh"
 
 # key 'Super + Pause' for monitor lcd off 
