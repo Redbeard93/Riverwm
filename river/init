@@ -12,6 +12,9 @@
 
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND _DISPLAY XDG_CURRENT_DESKTOP=river"
 
+# hide & reload waybar
+riverctl map normal Super B spawn "bash ~/.config/system_scripts/hideWayBar.sh"
+
 # key 'Super + Pause' for monitor lcd off 
 riverctl map normal Super Pause spawn "sudo vbetool dpms off; sed -i '2c a=0' ~/.config/system_scripts/displaymanager.sh"
 
