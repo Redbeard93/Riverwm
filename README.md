@@ -90,7 +90,7 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 10. Hibernate settings(for example)
 
 firstly, add `options resume=/dev/sdiJ`(wherever your swap disk is) in your (for example) systemd-boot bootloader such as 
-`/boot/loader/entries/arch.conf`, then， configure the initramfs, add `resume` in `HOOKS=(base udev autodetect keyboard modconf block filesystems fsck)` somewhere behind udev (mandatory), then run `sudo mkinitcpio -p`
+`/boot/loader/entries/arch.conf`, then， configure the initramfs, add `resume` in `HOOKS=(base udev autodetect keyboard modconf block filesystems fsck)` somewhere behind udev (mandatory), then run `sudo mkinitcpio -P`
 
 (https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) 
 
