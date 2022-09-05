@@ -1,4 +1,4 @@
-![alt text](https://github.com/EN-KS/Riverwm/blob/main/screenshot1.png)
+![alt text](https://github.com/EN-KS/Riverwm/blob/main/Tue-Sep-6-05:08:51-AM-CST-2022.png)
 # Riverwm setup walkthrough (keep updating)
 ## Archlinux init
 1. Install river & dependencies:
