@@ -100,7 +100,7 @@ firstly, add `options resume=/dev/sdiJ`(wherever your swap disk is) in your (for
 
 (https://www.cnblogs.com/sztom/p/10612593.html)
 
-11. To use OBS, install `qt5-wayland` `qt5ct` and `obs-studio`.to capture PC screen, install `xdg-desktop-portal` `xdg-desktop-portal-wlr`
+11. To use OBS, install `qt5-wayland` `qt5ct` and `obs-studio`.to capture PC screen, install `xdg-desktop-portal` `xdg-desktop-portal-wlr`, to use obs as vitual camera for example zoom stuff, install `v4l2loopback-dkms` and add user to video group(which happens at step 7.
 
 add this to `~/.bash_profile`
 ```
