@@ -102,6 +102,18 @@ firstly, add `options resume=/dev/sdiJ`(wherever your swap disk is) in your (for
 
 11. To use OBS, install `qt5-wayland` `qt5ct` and `obs-studio`.to capture PC screen, install `xdg-desktop-portal` `xdg-desktop-portal-wlr`
 
+add this to `~/.bash_profile`
+```
+# QT5 FIX
+export QT_QPA_PLATFORMTHEME="qt5ct"
+# Wayland Fix
+export QT_QPA_PLATFORM=wayland
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_DESKTOP=river
+export XDG_CURRENT_SESION_TYPE=wayland
+export GDK_BACKEND="wayland,x11"
+export MOZ_ENABLE_WAYLAND=1
+```
 https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-Wayland
 
 12.
