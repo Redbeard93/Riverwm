@@ -99,3 +99,5 @@ firstly, add `options resume=/dev/sdiJ`(wherever your swap disk is) in your (for
 (https://wiki.archlinux.org/title/systemd-boot#Loader_configuration)
 
 (https://www.cnblogs.com/sztom/p/10612593.html)
+
+11. To use OBS, install `qt5-wayland` and `obs-studio`
