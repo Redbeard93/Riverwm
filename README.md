@@ -100,7 +100,7 @@ firstly, add `options resume=/dev/sdiJ`(wherever your swap disk is) in your (for
 
 (https://www.cnblogs.com/sztom/p/10612593.html)
 
-11. To use OBS, install `qt5-wayland` and `obs-studio`
+11. To use OBS, install `qt5-wayland` `qt5ct` and `obs-studio`.to capture PC screen, install `xdg-desktop-portal` `xdg-desktop-portal-wlr`
 
 https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-Wayland
 
