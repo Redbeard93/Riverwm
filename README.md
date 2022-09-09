@@ -116,4 +116,10 @@ export MOZ_ENABLE_WAYLAND=1
 ```
 https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-Wayland
 
-12.
+12. Gaming
+
+    1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from "https://github.com/PCSX2/pcsx2/wiki/Installing-on-Linux#arch-linux" then
+    
+    download `pcsx2` `lib32-gtk2` and pcsx2 bios files from "https://romsmania.cc/download/bios/pcsx2-playstation-2-bios-3"
+    
+    
