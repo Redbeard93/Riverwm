@@ -121,5 +121,20 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
     1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from "https://github.com/PCSX2/pcsx2/wiki/Installing-on-Linux#arch-linux" then
     
     download `pcsx2` `lib32-gtk2` `qt6-wayland` and pcsx2 bios files from "https://romsmania.cc/download/bios/pcsx2-playstation-2-bios-3"
+    2. RedAlert2 problem: 
     
-    
+```
+Installed CD-ROM (pre-origin era) version of Red Alert 2 + Yuri's Revenge
+
+As mentioned in the comments and how-to above, changed ddraw load order, downloaded and used ddwrapper, changed ra2.ini config, ran the program on exclusive 32-bit wine with Windows XP version. Still encountered the black screen bug or disappearing menus.
+
+Finally downloaded launcher from cncnet.org/.
+Ran it in the same 32-bit wine prefix that I installed the game into.
+Pointed the directory of the game.
+Launcher downloaded some files/fixes and installed into the directory.
+[Note - requires winetricks (for noobs like me) to install microsoft XNA 4.0 framework, DirectX 9-11, dotNETFramework 4.5.]
+
+Launched the newly available CnCNetYRLauncher.exe in the game directory from wine.
+Everything worked as it should.
+Tried campaign, single player skirmish with 4 other opponents. No slow-downs.
+```
