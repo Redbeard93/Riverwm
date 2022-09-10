@@ -118,9 +118,11 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
 
 12. Gaming
 
-    1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from "https://github.com/PCSX2/pcsx2/wiki/Installing-on-Linux#arch-linux" then
+    1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from 
+
+       "https://github.com/PCSX2/pcsx2/wiki/Installing-on-Linux#arch-linux" then
     
-    download `pcsx2` `lib32-gtk2` `qt6-wayland` and pcsx2 bios files from "https://romsmania.cc/download/bios/pcsx2-playstation-2-bios-3"
+       download `pcsx2` `lib32-gtk2` `qt6-wayland` and pcsx2 bios files from "https://romsmania.cc/download/bios/pcsx2-playstation-2-bios-3"
     
     2. RedAlert2 problem: 
     
