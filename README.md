@@ -116,7 +116,7 @@ export MOZ_ENABLE_WAYLAND=1
 ```
 https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-Wayland
 
-12. Gaming
+12. Gaming from `lutris`
 
     1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from 
 
@@ -130,6 +130,7 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
     
     2. RedAlert2 problem solving: 
     
+       Installation: "https://www.youtube.com/watch?v=gInm74cTmW8&t=177s"
 
      > Installed CD-ROM (pre-origin era) version of Red Alert 2 + Yuri's Revenge
      > 
