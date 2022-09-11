@@ -145,4 +145,5 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > Launched the newly available CnCNetYRLauncher.exe in the game directory from wine.
      > Everything worked as it should.
      > Tried campaign, single player skirmish with 4 other opponents. No slow-downs.
+     > https://forums.lutris.net/t/starcaft-2-not-launching/8977
 
