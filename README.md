@@ -160,4 +160,31 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > thinkpad x220 cannot support vulkan
      > https://www.reddit.com/r/linux_gaming/comments/gaku6y/gaming_on_linux_without_vulkan/
 
-
+     > AMD
+     > 显卡驱动（GCN 1 及以上架构）：sudo pacman -S mesa mesa-vdpau libva-mesa-driver lib32-mesa lib32-mesa-vdpau lib32-libva-mesa-driver lib32-opencl-mesa
+     > 
+     > 显卡驱动（TeraScale 1 2 3 架构）：sudo pacman -S mesa mesa-vdpau libva-mesa-driver lib32-mesa lib32-mesa-vdpau lib32-libva-mesa-driver lib32-opencl-mesa
+     > 
+     > Vulkan：sudo pacman -S vulkan-icd-loader vulkan-radeon lib32-vulkan-icd-loader lib32-vulkan-radeon
+     > 
+     > OpenCL: sudo pacman -S opencl-mesa ocl-icd
+     > 
+     > andvlk 是由 AMD 开源的 AMD GPU Vulkan 实现，这个实现比 Mesa 的 RADV 在某些场景下性能要好一些，并且系统允许安装多个 Vulkan 实现并让软件进行选择，推荐游戏玩家安装。
+     > 
+     > Intel
+     > 显卡驱动：sudo pacman -S mesa vulkan-icd-loader vulkan-intel lib32-mesa lib32-vulkan-icd-loader lib32-vulkan-intel
+     > 
+     > 硬件视频加速：如果你的 Intel CPU 架构是 Broadwell 或以上的安装intel-media-driver，反之则安装libva-intel-driver lib32-libva-intel-driver。
+     > 
+     > OpenCL：如果你的 Intel CPU 架构是 Broadwell 或以上的安装intel-compute-runtime ocl-icd，反之则安装beignet ocl-icd，beignet 需要通过 AUR 安装。
+     > 
+     > Nvidia
+     > 前往 https://www.nvidia.com/en-us/drivers/unix/legacy-gpu/ 查看 Nvidia 私有驱动最新版本不支持的显卡列表，如果你的显卡不在这个列表里，那么你可以使用最新的 Nvidia 私有驱动，反之则需要使用开源驱动或旧版私有驱动（通过 AUR 安装）。
+     > 
+     > 最新私有驱动：sudo pacman -S nvidia nvidia-settings cuda xorg-server-devel lib32-nvidia-utils lib32-opencl-nvidia
+     > 
+     > 最新私有驱动的 OpenCL: sudo pacman -S opencl-nvidia ocl-icd
+     > 
+     > 开源驱动：sudo pacman -S mesa mesa-vdpau libva-mesa-driver lib32-mesa lib32-mesa-vdpau lib32-libva-mesa-driver
+     > 
+     > 某些 Nvidia 显卡型号使用开源驱动可能无法完全发挥性能，或者某些功能无法正常工作。
