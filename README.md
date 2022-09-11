@@ -155,8 +155,9 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > If you want to play Windows exclusive games with D3D's OpenGL, you can disable the use of DXVK in your Proton config file "user_settings.py" or
      > directly by setting "PROTON_USE_WINED3D=1" in your game launch options in Steam.
      > 
+     > Or in Lutris, by simply not checking the "DXVK" box.
+     > 
      > thinkpad x220 cannot support vulkan
      > https://www.reddit.com/r/linux_gaming/comments/gaku6y/gaming_on_linux_without_vulkan/
-       
-     > Or in Lutris, by simply not checking the "DXVK" box.
+
 
