@@ -159,23 +159,3 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > 
      > thinkpad x220 cannot support vulkan
      > https://www.reddit.com/r/linux_gaming/comments/gaku6y/gaming_on_linux_without_vulkan/
-
-     > Graphic Drivers
-     > AMD
-     >（GCN 1 and above）：sudo pacman -S mesa mesa-vdpau libva-mesa-driver lib32-mesa lib32-mesa-vdpau lib32-libva-mesa-driver lib32-opencl-mesa
-     > 
-     >（TeraScale 1 2 3 framework）：sudo pacman -S mesa mesa-vdpau libva-mesa-driver lib32-mesa lib32-mesa-vdpau lib32-libva-mesa-driver lib32-opencl-mesa
-     > 
-     > Vulkan：sudo pacman -S vulkan-icd-loader vulkan-radeon lib32-vulkan-icd-loader lib32-vulkan-radeon
-     > 
-     > OpenCL: sudo pacman -S opencl-mesa ocl-icd
-     > 
-     > andvlk 是由 AMD 开源的 AMD GPU Vulkan 实现，这个实现比 Mesa 的 RADV 在某些场景下性能要好一些，并且系统允许安装多个 Vulkan 实现并让软件进行选择，推荐游戏玩家安装。
-     > 
-     > Intel
-     > Driver：sudo pacman -S mesa vulkan-icd-loader vulkan-intel lib32-mesa lib32-vulkan-icd-loader lib32-vulkan-intel
-     > 
-     > 硬件视频加速：如果你的 Intel CPU 架构是 Broadwell 或以上的安装intel-media-driver，反之则安装libva-intel-driver lib32-libva-intel-driver。
-     > 
-     > OpenCL：如果你的 Intel CPU 架构是 Broadwell 或以上的安装intel-compute-runtime ocl-icd，反之则安装beignet ocl-icd，beignet 需要通过 AUR 安装。
-     > 
