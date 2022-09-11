@@ -147,7 +147,7 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > Tried campaign, single player skirmish with 4 other opponents. No slow-downs.
      > https://forums.lutris.net/t/starcaft-2-not-launching/8977
      > 
-          > anyway to play those games without vulkan and butchering the performance ?
+     > anyway to play those games without vulkan and butchering the performance ?
      > 
      > You're aware that Linux Gaming is going strong in Vulkan PRECISELY because it DOES NOT butcher performance as heavily as OpenGL translation
      > layers, right?
