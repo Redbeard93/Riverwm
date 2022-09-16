@@ -163,4 +163,4 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > thinkpad x220 cannot support vulkan
      > https://www.reddit.com/r/linux_gaming/comments/gaku6y/gaming_on_linux_without_vulkan/
      
-     ![alt text](https://github.com/EN-KS/Riverwm/blob/main/Sat-Sep-17-12:40:37-AM-CST-2022.png）
+![alt text](https://github.com/EN-KS/Riverwm/blob/main/Sat-Sep-17-12:40:37-AM-CST-2022.png）
