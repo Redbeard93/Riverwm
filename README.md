@@ -164,6 +164,7 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
      > https://www.reddit.com/r/linux_gaming/comments/gaku6y/gaming_on_linux_without_vulkan/
      
     3.  How I can run stuff on xwayland
+    
         just need to add QT_QPA_PLATFORM=xcb before the command to launch the program. You can add it before the program command in terminal for example         if you want that particular instance to run in xwayland.
 
         For more permanent solution, copy the application's shortcut from /usr/share/applications to $HOME/.local/applications, and add it in the Exec=           line. It would look like Exec=QT_QPA_PLATFORM=xcb program . Same can also be achieved by a menu editor if gui is more preferable
