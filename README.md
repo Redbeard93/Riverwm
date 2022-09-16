@@ -107,7 +107,7 @@ add this to `~/.bash_profile`
 # QT5 FIX
 export QT_QPA_PLATFORMTHEME="qt5ct"
 # Wayland Fix
-export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM="wayland;xcb"
 export XDG_CURRENT_DESKTOP=river
 export XDG_SESSION_DESKTOP=river
 export XDG_CURRENT_SESION_TYPE=wayland
