@@ -117,6 +117,9 @@ export MOZ_ENABLE_WAYLAND=1
 https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-Wayland
 
 12. Gaming from `lutris`
+       
+       install `qt5-wayland qt6-wayland lib32-gtk2` first
+       
 
     1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from 
 
