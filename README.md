@@ -120,6 +120,8 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
        
        install `qt5-wayland qt6-wayland lib32-gtk2` first
        
+       run yuzu with `QT_QPA_PLATFORM=xcb yuzu` (2022 yuzu doen`t support wayland yet)
+       
 
     1. game on ps2 simulator(eg: the king of fighters 98 ultimate on sony ps2): download libs from 
 
