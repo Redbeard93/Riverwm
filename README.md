@@ -177,3 +177,19 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
         LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt512/lib so as to play nice with potential other packages that may want to do similar.
         
         https://forums.linuxmint.com/viewtopic.php?t=308332
+        
+        ----------------------------------------------------------------------------------------------------------------------
+        
+        Solution for cannot exec yuzu runner in lutris under xwayland: write a bash script an make it executable
+        
+        write 
+        
+        ```
+        
+        #!/bin/bash
+
+        QT_QPA_PLATFORM=xcb yuzu
+
+        
+        ```
+        in yuzu-xwayland.sh then in terminal run command `chmod u+x yuzu-xwayland.sh`
