@@ -108,11 +108,11 @@ add this to `~/.bash_profile`
 export QT_QPA_PLATFORMTHEME="qt5ct"
 # Wayland Fix
 export QT_QPA_PLATFORM="wayland;xcb"
-export XDG_CURRENT_DESKTOP=river
-export XDG_SESSION_DESKTOP=river
-export XDG_CURRENT_SESION_TYPE=wayland
-export GDK_BACKEND="wayland,x11"
-export MOZ_ENABLE_WAYLAND=1
+# export XDG_CURRENT_DESKTOP=river
+# export XDG_SESSION_DESKTOP=river
+# export XDG_CURRENT_SESION_TYPE=wayland
+# export GDK_BACKEND="wayland,x11"
+# export MOZ_ENABLE_WAYLAND=1
 ```
 https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-Wayland
 
