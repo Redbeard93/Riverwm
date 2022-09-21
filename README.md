@@ -83,7 +83,7 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 
 7. To make  haikarainen/light work without sudo, add user to a secondary group----video group `sudo usermod -a -G video user`
 
-8. To use bluetooth Headset, install `pipewire pipewire-alsa pipewire-pulse bluez bluez-utils pavucontrol pamixer`  
+8. To use bluetooth Headset, install `pipewire pipewire-alsa pipewire-pulse bluez bluez-utils pavucontrol pamixer`  (To use headphone plugin, in Pavucontrol interface, go to Configuration, select Pro Audio, restart applications, should be good to go (don`t know why it kind of work only that way))
 
 9. To make vbetool work without sudo password, add `ALL ALL=(ALL) NOPASSWD:/usr/bin/vbetool` at the bottom line of `/etc/sudoers`
 
