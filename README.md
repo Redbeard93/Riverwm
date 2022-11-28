@@ -193,3 +193,12 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
         
         ```
         in yuzu-xwayland.sh then in terminal run command `chmod u+x yuzu-xwayland.sh`
+
+13. run terminal in x11 to use fcitx5-rime:
+
+        go to `/usr/share/applications/Alacritty.desktop` and change
+        
+        ```
+          3 TryExec=env WINIT_UNIX_BACKEND=x11 alacritty
+          4 Exec=env WINIT_UNIX_BACKEND=x11 alacritty
+        ```
