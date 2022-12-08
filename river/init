@@ -12,6 +12,9 @@
 
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
 
+# reload desktop apps
+riverctl map normal Super+Shift B spawn "bash ~/.config/river/process.sh"
+
 # hide & reload waybar
 riverctl map normal Super B spawn "bash ~/.config/system_scripts/hideWayBar.sh"
 
@@ -26,6 +29,12 @@ riverctl map normal None Pause spawn "sudo vbetool dpms on; sed -i '2c a=1' ~/.c
 
 # launcher
 riverctl map normal Super D spawn "rofi -show drun"
+
+# show i7z cpu info
+riverctl map normal Super+Shift c spawn "kitty sudo i7z"
+
+# show htop
+riverctl map normal Super+Shift t spawn "kitty htop"
 
 # ranger
 riverctl map normal Super+Shift f spawn "kitty --class ranger -e ranger"
