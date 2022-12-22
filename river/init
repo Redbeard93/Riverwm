@@ -215,7 +215,7 @@ riverctl float-filter-add title "popup title with spaces"
 # Set app-ids and titles of views which should use client side decorations
 riverctl csd-filter-add app-id "gedit"
 riverctl csd-filter-add app-id "firefox"
-
+riverctl csd-filter-add app-id "kitty"
 # Set touchpad by grabbing the event
 for pad in $(riverctl list-inputs | grep -i touchpad )
 do
