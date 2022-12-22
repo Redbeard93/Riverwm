@@ -200,7 +200,7 @@ done
 riverctl background-color 0xB5E8E0
 riverctl border-color-focused 0x89DCEB
 riverctl border-color-unfocused 0xABE9B3
-
+riverctl border-width 0
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
 
@@ -210,6 +210,7 @@ bash $HOME/.config/river/process.sh
 # Make certain views start floating
 riverctl float-filter-add app-id float
 riverctl float-filter-add app-id mpv-float
+riverctl float-filter-add app-id "lutris"
 riverctl float-filter-add title "popup title with spaces"
 
 # Set app-ids and titles of views which should use client side decorations
@@ -228,4 +229,4 @@ riverctl focus-follows-cursor normal
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-exec rivertile -view-padding 6 -outer-padding 6 -main-ratio 0.62 -main-location right
+exec rivertile -view-padding 6 -outer-padding 6 -main-ratio 0.62 -main-location right &
