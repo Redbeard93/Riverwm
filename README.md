@@ -16,7 +16,7 @@ I use halmak keyboard layout, for convenience, which is achieved by configuring 
 if use bash, put these two lines in `/etc/environment`
 
 ```
-XKB_DEFAULT_LAYOUT='us(dvorak)'
+XKB_DEFAULT_LAYOUT='us(basic)'
 XKB_DEFAULT_OPTIONS=ctrl:swapcaps
 ``` 
 
