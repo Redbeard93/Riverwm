@@ -7,8 +7,8 @@
     fg-col: #7F7F7F;
     fg-col2: #F28FAD;
     grey: #D9E0EE;
-    width: 53%;
-    height: 33%;
+    width: 2%;
+    height: 34%;
     location: center;
     border-radius: 3px;
 }
