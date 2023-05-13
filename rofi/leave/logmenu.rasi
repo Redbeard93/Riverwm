@@ -1,5 +1,5 @@
 configuration {
-    font: "Fira Code Nerd Font Mono:style solid 28";
+    font: "Fira Code Nerd Font Mono:style solid 38";
     fullscreen: false;
     disable-history: false;
     hide-scrollbar: true;
@@ -24,7 +24,7 @@ listview {
     spacing:                        0px;
     cycle:                          true;
     dynamic:                        true;
-    layout:                         vertical;
+    layout:                         horizontal;
     background-color: @bg-col;
 }
 
@@ -40,8 +40,8 @@ element {
 
 element-text {
 expand:                         true;
-horizontal-align:               0.5;
-vertical-align:                 0.5;
+horizontal-align:               0.38;
+vertical-align:                 0;
 margin:                         2px 2px 2px 2px;
 }
 
