@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Options
-shutdown=""
-reboot=""
-lock=""
-suspend=""
-hibernate="﫭"
-logout=""
+shutdown="󰐥"
+reboot="󰁪"
+lock="󰷛"
+suspend="󰤄"
+hibernate="󰋊"
+logout="󰍃"
 
 # Variable passed to rofi
 choice=$(printf "$shutdown\n$reboot\n$logout\n$suspend\n$hibernate" | rofi -dmenu -theme $HOME/.config/rofi/leave/logmenu.rasi)
