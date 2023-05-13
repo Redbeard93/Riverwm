@@ -1,6 +1,6 @@
 * {
     bg-col:  transparent;//#1E1D2F;
-    bg-col-light: #1E1D2F;
+    bg-col-light: transparent;//#1E1D2F;
     border-col: #1E1D2F;
     selected-col: transparent;//#1E1D2F;
     blue: #7aa2f7;
