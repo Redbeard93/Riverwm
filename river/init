@@ -1,232 +1,879 @@
-#!/bin/sh
+#!/usr/bin/luajit
 
-# This is the example configuration file for river.
-#
-# If you wish to edit this, you will probably want to copy it to
-# $XDG_CONFIG_HOME/river/init or $HOME/.config/river/init first.
-#
-# See the river(1), riverctl(1), and rivertile(1) man pages for complete
-# documentation.
+local getenv = os.getenv
+local fmt = string.format
+local exec = os.execute
 
-# Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
+--trim leading and trailling whitespaces
+local function trim(str)
+  return str:gsub("^%s*(.-)%s*$", "%1")
+end
 
-riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
+-- Function to check if a value exists in the table
+local function exists(value, tbl)
+  for _, v in pairs(tbl) do
+    if v == value then
+      return true
+    end
+  end
+  return false
+end
 
-# reload desktop apps
-riverctl map normal Super+Shift B spawn "bash ~/.config/river/process.sh"
+---@return string
+---@param cmd string
+---@nodiscard
+local function popen(cmd)
+  local handle = assert(io.popen(cmd))
+  ---@type string
+  local output = handle:read("*a")
+  output = trim(output)
+  handle:close()
+  return output
+end
 
-# hide & reload waybar
-riverctl map normal Super B spawn "bash ~/.config/system_scripts/hideWayBar.sh"
+-- convert `cmd`'s input command weather table or list to string
+---@return string
+---@param command table<string>|string is the command
+---@param sep string? seperator is set by default to " "
+---@param i integer? start index
+---@param j integer? end index
+---@nodiscard
+local function cmd(command, sep, i, j)
+  if type(sep) == "nil" then
+    sep = " "
+  end
 
-# key 'Super + Pause' for monitor lcd off 
-riverctl map normal Super Pause spawn "sudo vbetool dpms off; sed -i '2c a=0' ~/.config/system_scripts/displaymanager.sh"
+  if type(command) == "table" then
+    return table.concat(command, sep, i, j)
+  else
+    return tostring(command)
+  end
+end
 
-# key 'Pause' for monitor lcd on
-riverctl map normal None Pause spawn "sudo vbetool dpms on; sed -i '2c a=1' ~/.config/system_scripts/displaymanager.sh"
+--  Helper fuction to only spawn a program when no instance of it is running
+--  already, so init can be re-run without all widgets being duplicated.
+---@param command string
+local function spawn_once(command)
+  local program = string.match(command, "^%w+")
 
-# launcher
-riverctl map normal Super D spawn "rofi -show drun"
+  ---@return boolean
+  ---@param program_name string
+  local function is_not_spawned(program_name)
+    local is_running =
+        popen(fmt("if pgrep %s >/dev/null 2>&1 ; then echo 'true' ; else echo 'false' ; fi", program_name))
 
-# show i7z cpu info
-riverctl map normal Super+Shift c spawn "kitty sudo i7z"
+    local stringtoboolean = { ["true"] = true, ["false"] = false }
+    return not stringtoboolean[is_running]
+  end
 
-# show htop
-riverctl map normal Super+Shift t spawn "kitty htop"
+  local is_not_running = is_not_spawned(program)
+  if is_not_running then
+    exec(fmt("riverctl spawn '%s'", command))
+  end
+end
 
-# ranger
-riverctl map normal Super+Shift f spawn "kitty --class ranger -e ranger"
+-- Set Variables
 
-# firefox
-riverctl map normal Super+Shift B spawn "firefox"
+-- variable to store virtual terminal number
+--local vtnr = getenv("XDG_VTNR")
 
-# Screenshot
-riverctl map normal None Print spawn 'IMG=~/Pictures/screenshots/$(date | sed "s/\s/-/g" | sed "s/--/-/g").png&&grim -g "$(slurp)" $IMG && cat $IMG | wl-copy && notify-send "Screenshot has been saved and copied to your clipboard" -a "grim" -u normal -t 2000'
+-- Your preferred terminal
+-- local terminal = "kitty --single-instance  --instance-group " .. vtnr
+local terminal = "ghostty"
 
-# Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal Super+Shift Return spawn kitty
+local HOME = getenv("HOME")
 
-# Super+Q to close the focused view
-riverctl map normal Super+Shift Q close
+-- Path to a collection of wallpapers
+local wallpapers_path = HOME .. "/.config/river/wallpapers/"
 
-# manual syslock
-riverctl map normal Super+Shift X spawn "bash ~/.config/system_scripts/wayland_session_lock"
+local wallpaper = wallpapers_path .. popen("ls " .. wallpapers_path .. " | shuf -n 1")
 
-# Super+Shift+E to exit river
-riverctl map normal Super+Shift E spawn "bash ~/.config/rofi/leave/powermenu.sh"
+-- local lock_screen_wallpaper = wallpapers_path .. "Talk-Is-Cheap-Show-Me-The-Code.png"
+-- local swaylock = fmt([["swaylock --daemonize --image %s"]], lock_screen_wallpaper)
+local waylock = "waylock"
 
-# Super+J and Super+K to focus the next/previous view in the layout stack
-riverctl map normal Super J focus-view next
-riverctl map normal Super K focus-view previous
+local screenshot_path = HOME .. '/Pictures/Screenshots/Captura-de-pantalla-de_"$(date +%F_%X)".png'
 
-# Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
-# view in the layout stack
-riverctl map normal Super+Shift J swap next
-riverctl map normal Super+Shift K swap previous
+-- wpctl's -l flag is to prevent the volume from exceeding/surpass 160% == 1.6
+local max_volume = 1
 
-# Super+Period and Super+Comma to focus the next/previous output
-riverctl map normal Super Period focus-output next
-riverctl map normal Super Comma focus-output previous
+-- File manger
+local file_manager = "ranger"
 
-# Super+Shift+{Period,Comma} to send the focused view to the next/previous output
-riverctl map normal Super+Shift Period send-to-output next
-riverctl map normal Super+Shift Comma send-to-output previous
+-- Menu Launcher
+local desktop_launcher = fmt([[fuzzel --terminal "%s" --lines 25 --width 54 --show-actions]], terminal)
+local fuzzel_menu = fmt([[fuzzel --terminal "%s" --lines 25 --width 90 --dmenu]], terminal)
 
-# Super+Return to bump the focused view to the top of the layout stack
-riverctl map normal Super Return zoom
+local status_bar = "waybar pulse backlight battery"
 
-# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
-riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+local autostarts = {
+  { "systemctl --user set-environment XDG_CURRENT_DESKTOP=river" },
+  { "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" },
+  { "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
+  -- Startup programs
+  -- stylua: ignore
+  {
+    "swayidle", "-w",
+    "timeout", "300", waylock,
+    "before-sleep", waylock,
+    "idlehint", "780",
+  },
+  { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
+  --	{ "wbg", wallpaper },
+  -- { status_bar }, # don't run status bar on startup
+  { "fcitx5" },
+  { "mako" },
+  -- wlsunset -t 2500 -T 6500 -l 5.5502 -L -0.2174 -S 07:00 -s 18:00 -d 1800 -g 1.0
+  -- { "wlsunset", "-t 700", "-l 5.5502", "-L -0.2174" },
+  { "wl-paste", "--watch", "cliphist", "store" },
+  -- { "batsignal", "-b", "-e", "-p", "-w 35", "-c 18", "-d 12", "-f 85", "-m 180", "-D systemctl suspend" },
+}
 
-# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
-riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
-riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+-- Run startup commands
+---@param autostart_commands table<table<string>>
+local function run_autostarts(autostart_commands)
+  for _, commands in ipairs(autostart_commands) do
+    exec(fmt([[riverctl spawn '%s']], cmd(commands)))
+  end
+end
 
-# Super+Alt+{H,J,K,L} to move views
-riverctl map normal Super+Alt H move left 100
-riverctl map normal Super+Alt J move down 100
-riverctl map normal Super+Alt K move up 100
-riverctl map normal Super+Alt L move right 100
+local oneshot_commands = {
+  { "kanshi" },
+}
 
-# Super+Alt+Control+{H,J,K,L} to snap views to screen edges
-riverctl map normal Super+Alt+Control H snap left
-riverctl map normal Super+Alt+Control J snap down
-riverctl map normal Super+Alt+Control K snap up
-riverctl map normal Super+Alt+Control L snap right
+-- run programs that need to be executed only once
+---@param oneshot_programs table<integer,table>
+local function run_oneshots(oneshot_programs)
+  for _, command in ipairs(oneshot_programs) do
+    spawn_once(cmd(command))
+  end
+end
 
-# Super+Alt+Shif+{H,J,K,L} to resize views
-riverctl map normal Super+Alt+Shift H resize horizontal -100
-riverctl map normal Super+Alt+Shift J resize vertical 100
-riverctl map normal Super+Alt+Shift K resize vertical -100
-riverctl map normal Super+Alt+Shift L resize horizontal 100
+local inputs = {
+  ["pointer-2-14-ETPS/2_Elantech_Touchpad"] = {
+    ["events"] = "disabled-on-external-mouse",
+    ["accel-profile"] = "adaptive",
+    ["pointer-accel"] = "0.6",
+    ["click-method"] = "clickfinger",
+    ["drag"] = "enabled",
+    ["disable-while-typing"] = "enabled",
+    ["middle-emulation"] = "enabled",
+    ["natural-scroll"] = "enabled",
+    ["tap"] = "enabled",
+    ["tap-button-map"] = "left-right-middle",
+    ["scroll-method"] = "two-finger",
+  },
+}
 
-# Super + Left Mouse Button to move views
-riverctl map-pointer normal Super BTN_LEFT move-view
+-- Configure input devices
+local function configure_inputs(input_options)
+  for device, options in pairs(input_options) do
+    for key, val in pairs(options) do
+      exec(fmt("riverctl input %s %s %s", device, key, val))
+    end
+  end
+end
 
-# Super + Right Mouse Button to resize views
-riverctl map-pointer normal Super BTN_RIGHT resize-view
+local river_options = {
+  ["default-attach-mode"] = "top",
+  ["border-width"] = 0,
+  ["focus-follows-cursor"] = "normal",
+  ["hide-cursor"] = { "when-typing", "enabled" },
+  ["set-cursor-warp"] = "on-output-change",
+  ["set-repeat"] = { 50, 300 },
+  ["xcursor-theme"] = { "Adwaita", 24 },
+  ["default-layout"] = "rivertile",
+}
 
-for i in $(seq 1 9)
-do
-    tags=$((1 << ($i - 1)))
+-- Set river's options
+local function set_river_options(river_ui_options)
+  for key, value in pairs(river_ui_options) do
+    exec(fmt("riverctl %s %s", key, cmd(value)))
+  end
+end
 
-    # Super+[1-9] to focus tag [0-8]
-    riverctl map normal Super $i set-focused-tags $tags
+local gsettings = {
+  ["org.gnome.desktop.interface"] = {
+    ["gtk-theme"] = "Adwaita-dark",
+    ["icon-theme"] = "Adwaita",
+    ["cursor-theme"] = river_options["xcursor-theme"][1],
+    ["cursor-size"] = river_options["xcursor-theme"][2],
+    ["color-scheme"] = "prefer-dark",
+  },
+}
 
-    # Super+Shift+[1-9] to tag focused view with tag [0-8]
-    riverctl map normal Super+Shift $i set-view-tags $tags
+-- GNOME-related settings
+local function set_gnome_settings(gnome_settings)
+  for group, tbl in pairs(gnome_settings) do
+    for key, value in pairs(tbl) do
+      exec(fmt("gsettings set %s %s %s", group, key, value))
+    end
+  end
+end
 
-    # Super+Ctrl+[1-9] to toggle focus of tag [0-8]
-    riverctl map normal Super+Control $i toggle-focused-tags $tags
+--TODO: consider simplifying mapping with custom modes https://wiki.archlinux.org/title/River#Modes
+-- Each mapping contains 4 keys:
+-- mod: string|list (modifiers, concanated by '+')
+-- key: string
+-- command: string|list (the command passed to riverctl)
+-- opt: string ('release' or 'repeat')
+local mappings = {
+  -- Key bindings
+  map = {
+    normal = {
+      -- Terminal
+      {
+        mod = "Super",
+        key = "T",
+        command = { "spawn", fmt([['%s']], terminal) },
+      },
+      -- clear notifications
+      {
+        mod = { "Super" },
+        key = "U",
+        command = {
+          "spawn",
+          [['makoctl dismiss --all']],
+        },
+      },
+      {
+        mod = { "Super" },
+        key = "R",
+        command = {
+          "spawn",
+          [[~/.config/river/init]],
+        },
+      },
+      {
+        mod = { "Super" },
+        key = "E",
+        command = {
+          "spawn",
+          fmt([['%s -e %s']], terminal, file_manager),
+        },
+      },
+      -- Browser
+      {
+        mod = { "Super" },
+        key = "B",
+        command = { "spawn", [[firefox]] },
+      },
+      -- Application launcher
+      {
+        mod = "Super",
+        key = "D",
+        command = { "spawn", fmt([['%s']], desktop_launcher) },
+      },
+      -- Clipboard management with cliphist
+      {
+        mod = { "Super", "Alt" },
+        key = "C",
+        command = { "spawn", fmt([['cliphist list | %s | cliphist decode | wl-copy']], fuzzel_menu) },
+      },
+      {
+        mod = { "Super", "Alt" },
+        key = "D",
+        command = { "spawn", fmt([['cliphist list | %s | cliphist delete']], fuzzel_menu) },
+      },
+      -- Take screenshot of a window
+      {
+        mod = "None",
+        key = "Print",
+        command = {
+          "spawn",
+          fmt([['grim %s']], screenshot_path),
+        },
+      },
+      -- Take a screenshot of a region of a window
+      {
+        mod = "Super",
+        key = "Print",
+        command = {
+          "spawn",
+          fmt([['grim -g "$(slurp)" %s']], screenshot_path),
+        },
+      },
+      -- Take a screenshot and copy to clipboard
+      {
+        mod = "Alt",
+        key = "Print",
+        command = { "spawn", fmt([['grim - | wl-copy ']]) },
+      },
+      -- Super+Q to close the focused view
+      {
+        mod = "Super",
+        key = "Q",
+        command = "close",
+      },
+      -- Super+Shift+Q to exit river
+      {
+        mod = { "Super", "Shift" },
+        key = "Q",
+        command = "exit",
+      },
+      -- Super+Shift+X to lock the screen
+      {
+        mod = { "Super", "Shift" },
+        key = "X",
+        command = { "spawn", fmt("%s", waylock) },
+      },
+      -- toggle showing status bar
+      {
+        mod = { "Super", "Shift" },
+        key = "B",
+        command = {
+          "spawn",
+          fmt(
+            [["if pgrep %s ; then pkill %s ; else %s & fi"]],
+            string.match(status_bar, "^%w+"),
+            string.match(status_bar, "^%w+"),
+            status_bar
+          ),
+        },
+      },
+      -- Super+{J,K} to focus next/previous view in the layout stack
+      {
+        mod = "Super",
+        key = "N",
+        command = { "focus-view", "next" },
+      },
+      {
+        mod = "Super",
+        key = "P",
+        command = { "focus-view", "previous" },
+      },
+      -- Super+Shift+{J,K} to swap focused view with the next/previous view in the layout stack
+      {
+        mod = { "Super", "Shift" },
+        key = "N",
+        command = { "swap", "next" },
+      },
+      {
+        mod = { "Super", "Shift" },
+        key = "P",
+        command = { "swap", "previous" },
+      },
+      -- Alt+{P,N} to focus next/previous available display output
+      {
+        mod = "None",
+        key = "0x3E16",
+        command = { "focus-output", "next" },
+      },
+      {
+        mod = "Super",
+        key = "K",
+        command = { "focus-output", "previous" },
+      },
+      -- Alt+Shift+{P,N} to send the focused view to next/previous available display output
+      {
+        mod = { "Super", "Shift" },
+        key = "J",
+        command = { "send-to-output", "next" },
+      },
+      {
+        mod = { "Super", "Shift" },
+        key = "K",
+        command = { "send-to-output", "previous" },
+      },
+      -- Super+Shift+E to bump the focused view to the top of the layout stack
+      {
+        mod = { "Super", "Shift" },
+        key = "E",
+        command = "zoom",
+      },
+      -- Super+{H,L} to decrease/increase the main_factor value of rivertile by 0.02
+      {
+        mod = "Super",
+        key = "H",
+        command = { "send-layout-cmd", "rivertile", [['main-ratio -0.02']] },
+      },
+      {
+        mod = "Super",
+        key = "L",
+        command = { "send-layout-cmd", "rivertile", [['main-ratio +0.02']] },
+      },
+      -- Super+Shift+{H,L} to increment/decrement the main_count value of rivertile
+      {
+        mod = { "Super", "Shift" },
+        key = "H",
+        command = { "send-layout-cmd", "rivertile", [['main-count -1']] },
+      },
+      {
+        mod = { "Super", "Shift" },
+        key = "L",
+        command = { "send-layout-cmd", "rivertile", [['main-count +1']] },
+      },
+      -- Control+Alt+{H,J,K,L} ie control in which direction the main area is positioned
+      {
+        mod = { "Control", "Alt" },
+        key = "H",
+        command = { "send-layout-cmd", "rivertile", [['main-location left']] },
+      },
+      {
+        mod = { "Control", "Alt" },
+        key = "J",
+        command = { "send-layout-cmd", "rivertile", [['main-location bottom']] },
+      },
+      {
+        mod = { "Control", "Alt" },
+        key = "K",
+        command = { "send-layout-cmd", "rivertile", [['main-location top']] },
+      },
+      {
+        mod = { "Control", "Alt" },
+        key = "L",
+        command = { "send-layout-cmd", "rivertile", [['main-location right']] },
+      },
+      -- Super+Alt+{H,J,K,L} to move views (floating)
+      {
+        mod = { "Super", "Alt" },
+        key = "H",
+        command = { "move", "left", 100 },
+      },
+      {
+        mod = { "Super", "Alt" },
+        key = "J",
+        command = { "move", "down", 100 },
+      },
+      {
+        mod = { "Super", "Alt" },
+        key = "K",
+        command = { "move", "up", 100 },
+      },
+      {
+        mod = { "Super", "Alt" },
+        key = "L",
+        command = { "move", "right", 100 },
+      },
+      -- Super+Control+{H,J,K,L} to resize views (floating)
+      {
+        mod = { "Super", "Control" },
+        key = "H",
+        command = { "resize", "horizontal", -100 },
+      },
+      {
+        mod = { "Super", "Control" },
+        key = "J",
+        command = { "resize", "vertical", -100 },
+      },
+      {
+        mod = { "Super", "Control" },
+        key = "K",
+        command = { "resize", "vertical", 100 },
+      },
+      {
+        mod = { "Super", "Control" },
+        key = "L",
+        command = { "resize", "horizontal", 100 },
+      },
+      -- Super+Alt+Control+{H,J,K,L} to snap views to screen edges (floating)
+      {
+        mod = { "Super", "Alt", "Control" },
+        key = "H",
+        command = { "snap", "left" },
+      },
+      {
+        mod = { "Super", "Alt", "Control" },
+        key = "J",
+        command = { "snap", "down" },
+      },
+      {
+        mod = { "Super", "Alt", "Control" },
+        key = "K",
+        command = { "snap", "up" },
+      },
+      {
+        mod = { "Super", "Alt", "Control" },
+        key = "L",
+        command = { "snap", "right" },
+      },
+      -- Super+Space to toggle float
+      {
+        mod = "Super",
+        key = "Space",
+        command = "toggle-float",
+      },
+      -- Super+F to toggle fullscreen
+      {
+        mod = "Super",
+        key = "F",
+        command = "toggle-fullscreen",
+      },
+      -- Sets tags to their previous value on the currently focused output, allowing jumping back and forth between 2 tag setups.
+      {
+        mod = "Super",
+        key = "Tab",
+        command = "focus-previous-tags",
+      },
+      -- Assign the currently focused view the previous tags of the currently focused output.
+      {
+        mod = { "Super", "Shift" },
+        key = "Tab",
+        command = "send-to-previous-tags",
+      },
+    },
+    locked = {
+      -- Eject optical drives
+      {
+        mod = "None",
+        key = "XF86Eject",
+        command = { "spawn", [['eject -T']] },
+      },
+      -- Control pipewire volume
+      {
+        mod = "None",
+        key = "XF86AudioRaiseVolume",
+        command = {
+          "spawn",
+          fmt([['wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%%+ -l %.2f']], max_volume),
+        },
+        opt = "repeat",
+      },
+      -- To lower the volume
+      {
+        mod = "None",
+        key = "XF86AudioLowerVolume",
+        command = {
+          "spawn",
+          fmt([['wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%%- -l %.2f']], max_volume),
+        },
+        opt = "repeat",
+      },
+      -- #To mute/unmute the volume
+      {
+        mod = "None",
+        key = "XF86AudioMute",
+        command = { "spawn", [['wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle']] },
+      },
+      -- #To mute/unmute the microphone
+      {
+        mod = "None",
+        key = "XF86AudioMicMute",
+        command = { "spawn", [['wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle']] },
+      },
+      -- Control MPRIS aware media players with 'playerctl'
+      {
+        mod = "None",
+        key = "XF86AudioPause ",
+        command = { "spawn", [['playerctl play-pause']] },
+      },
+      {
+        mod = "None",
+        key = "XF86AudioPlay",
+        command = { "spawn", [['playerctl play-pause']] },
+      },
+      {
+        mod = "None",
+        key = "XF86AudioPrev",
+        command = { "spawn", [['playerctl previous']] },
+      },
+      {
+        mod = "None",
+        key = "XF86AudioNext",
+        command = { "spawn", [['playerctl next']] },
+      },
+      -- Control screen backlight brightness
+      {
+        mod = "None",
+        key = "XF86MonBrightnessUp",
+        command = { "spawn", [['brightnessctl set 1%%+']] },
+        opt = "repeat",
+      },
+      {
+        mod = "None",
+        key = "XF86MonBrightnessDown",
+        command = { "spawn", [['brightnessctl set 1%%-']] },
+        opt = "repeat",
+      },
+    },
+  },
+  -- Mappings for pointer (mouse)
+  ["map-pointer"] = {
+    normal = {
+      -- Super + Left Mouse Button to move views
+      {
+        mod = "Super",
+        key = "BTN_LEFT",
+        command = "move-view",
+      },
+      -- Super + Right Mouse Button to resize views
+      {
+        mod = "Super",
+        key = "BTN_RIGHT",
+        command = "resize-view",
+      },
+    },
+  },
+}
 
-    # Super+Shift+Ctrl+[1-9] to toggle tag [0-8] of focused view
-    riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
-done
+-- Keyboard and mouse bindings
+---@param mapping_options table<string,table<string,table>>
+local function setup_mappings(mapping_options)
+  for map_type, tbl in pairs(mapping_options) do
+    for mode, value in pairs(tbl) do
+      for _, binding in ipairs(value) do
+        local modifiers = cmd(binding.mod, "+")
+        local map_cmd = cmd(binding.command, " ")
 
-# Super+0 to focus all tags
-# Super+Shift+0 to tag focused view with all tags
-all_tags=$(((1 << 32) - 1))
-riverctl map normal Super 0 set-focused-tags $all_tags
-riverctl map normal Super+Shift 0 set-view-tags $all_tags
+        -- Options -release and -repeat for 'map' and 'unmap' commands
+        local opt = binding.opt
+        if opt == "release" or opt == "repeat" then
+          opt = "-" .. opt
+        else
+          opt = ""
+        end
+        exec(fmt("riverctl %s %s %s %s %s %s", map_type, opt, mode, modifiers, binding.key, map_cmd))
 
-# Super+Space to toggle float
-riverctl map normal Super Space toggle-float
+        -- Duplicate mappings of mode 'locked' for mode 'normal'
+        if mode == "locked" then
+          exec(fmt("riverctl %s %s normal %s %s %s", map_type, opt, modifiers, binding.key, map_cmd))
+        end
+      end
+    end
+  end
+end
 
-# Super+F to toggle fullscreen
-riverctl map normal Super F toggle-fullscreen
+---@alias  UserModes  {[string]: {enter:{mod:string,key:string},commands:({mod:string,key:string,command:string})[],exit:{mod:string,key:string}}}
+---@type UserModes
+local user_modes = {
+  -- set $power_mangement "(s)uspend,hy(b)rid-sleep,(h)ibernate,(r)eboot,suspend-(t)hen-hibernate,(l)ock,(R)UEFI,(S)hutdown"
+  power_management = {
+    enter = {
+      mod = "None",
+      key = "XF86AudioMedia",
+    },
+    commands = {
+      {
+        mod = "None",
+        key = "S",
+        command = "systemctl suspend",
+      },
+      {
+        mod = "None",
+        key = "T",
+        command = "systemctl suspend-then-hibernate",
+      },
+      {
+        mod = "None",
+        key = "B",
+        command = "systemctl hybrid-sleep",
+      },
+      {
+        mod = "None",
+        key = "H",
+        command = "systemctl hibernate",
+      },
+      {
+        mod = "None",
+        key = "R",
+        command = "systemctl reboot",
+      },
+      {
+        mod = "Shift",
+        key = "R",
+        command = "systemctl reboot --firmware-setup",
+      },
+      {
+        mod = "Shift",
+        key = "S",
+        command = "systemctl poweroff -i",
+      },
+    },
+    exit = {
+      mod = "None",
+      key = "Escape",
+    },
+  },
+}
 
-# Super+{Up,Right,Down,Left} to change layout orientation
-riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
-riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
-riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
-riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+---@param user_declared_modes UserModes
+local function setup_user_modes(user_declared_modes)
+  for declared_mode, modes in pairs(user_declared_modes) do
+    exec(fmt("riverctl declare-mode %s", declared_mode))
 
-# Declare a passthrough mode. This mode has only a single mapping to return to
-# normal mode. This makes it useful for testing a nested wayland compositor
-riverctl declare-mode passthrough
+    local enter = modes.enter
+    exec(fmt("riverctl map normal %s %s enter-mode %s", enter.mod, enter.key, declared_mode))
 
-# Super+F11 to enter passthrough mode
-riverctl map normal Super F11 enter-mode passthrough
+    local exit = modes.exit
+    exec(fmt("riverctl map %s %s %s enter-mode normal", declared_mode, exit.mod, exit.key))
 
-# Super+F11 to return to normal mode
-riverctl map passthrough Super F11 enter-mode normal
+    for _, mode in ipairs(modes.commands) do
+      exec(
+        fmt(
+          'riverctl map %s %s %s spawn "%s"',
+          declared_mode,
+          mode.mod,
+          mode.key,
+          "riverctl enter-mode normal  && " .. mode.command
+        )
+      )
+    end
+  end
+end
 
-# The scratchpad will live on an unused tag. Which tags are used depends on your
-# config, but rivers default uses the first 9 tags.
-scratch_tag=$((1 << 20 ))
+-- Additional modes and their mappings to switch between them and 'normal' mode
+--
+-- name: string (the name of the additional mode)
+-- mod: string|list (modifiers for key binding, concanated by '+')
+-- key: string
+local modes = {
+  {
+    name = "passthrough",
+    mod = "Super",
+    key = "F11",
+  },
+}
 
-# Toggle the scratchpad with Super+P
-riverctl map normal Super P toggle-focused-tags ${scratch_tag}
+-- Additional modes (beside 'normal' and 'locked')
+---@param modes_option table<table<string,string>>
+local function setup_modes(modes_option)
+  for _, mode in ipairs(modes_option) do
+    local mode_name = mode.name
+    local modifiers = mode.mod
 
-# Send windows to the scratchpad with Super+Shift+P
-riverctl map normal Super+Shift P set-view-tags ${scratch_tag}
+    -- Declare the mode
+    exec("riverctl declare-mode " .. mode_name)
 
-# Set spawn tagmask to ensure new windows don't have the scratchpad tag unless
-# explicitly set.
-all_but_scratch_tag=$(( ((1 << 32) - 1) ^ $scratch_tag ))
-riverctl spawn-tagmask ${all_but_scratch_tag}
+    -- Setup key bindings to enter/exit the mode
+    exec(fmt("riverctl map normal %s %s enter-mode %s", modifiers, mode.key, mode_name))
+    exec(fmt("riverctl map %s %s %s enter-mode normal", mode_name, modifiers, mode.key))
+  end
+end
 
-# Various media key mapping examples for both normal and locked mode which do
-# not have a modifier
-for mode in normal locked
-do
-    # Eject the optical drive (well if you still have one that is)
-    riverctl map $mode None XF86Eject spawn 'eject -T'
+-- Mappings for tag management
+-- These mappings are repeated, so they are separated from the mappings table
+local function tag_mappings()
+  for i = 1, 9 do
+    local tag_mask = bit.lshift(1, i - 1) -- 1 << (i - 1)
 
-    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    #riverctl map $mode Mod1 XF86AudioRaiseVolume  spawn 'pamixer -i 5'
-    #riverctl map $mode Mod1 XF86AudioLowerVolume  spawn 'pamixer -d 5'
-    #riverctl map $mode Mod1 XF86AudioMute         spawn 'pamixer --toggle-mute'
+    -- Super+[1-9] to set specified tag output (tag-mask) as current focused tag output
+    exec(fmt("riverctl map normal Super %s set-focused-tags %s", i, tag_mask))
 
-    #riverctl map $mode Mod1 X  spawn 'amixer set PCM 5%+ && pkill -x -RTMIN+11 waybar'
-    #riverctl map $mode Mod1 K  spawn 'amixer set PCM 5%- && pkill -x -RTMIN+11 waybar'
-    #riverctl map $mode Mod1 Y  spawn 'amixer set PCM toggle && pkill -x -RTMIN+11 waybar'
-    riverctl map $mode Mod1 X  spawn 'pamixer -i 5'
-    riverctl map $mode Mod1 K  spawn 'pamixer -d 5'
-    riverctl map $mode Mod1 Y  spawn 'pamixer --toggle-mute'
+    -- Super+Shift+[1-9] to set/move focused view/window onto specified tag output [0-8]
+    exec(fmt("riverctl map normal Super+Shift %s set-view-tags %s", i, tag_mask))
 
-    # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
-    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPlay  spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPrev  spawn 'playerctl previous'
-    riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
+    -- Super+Control+[1-9] to toggle (copying of specified) tag output [0-8] onto current focused tag output
+    exec(fmt("riverctl map normal Super+Control %s toggle-focused-tags %s", i, tag_mask))
 
-    # Control screen backlight brighness with light (https://github.com/haikarainen/light)
-    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
-done
+    -- Super+Alt+[1-9] to toggle (sending a copy of) current focused view/window onto specified tag output [0-8]
+    exec(fmt("riverctl map normal Super+Control+Shift %s toggle-view-tags %s", i, tag_mask))
+  end
 
-# Set background and border color
-riverctl background-color 0xB5E8E0
-riverctl border-color-focused 0x89DCEB
-riverctl border-color-unfocused 0xABE9B3
-riverctl border-width 0
-# Set keyboard repeat rate
-riverctl set-repeat 50 300
+  -- Super+0 to focus all tags
+  -- Super+Shift+0 to tag focused view/window with all tags
+  -- river has a total of 32 tags
+  local all_tags_mask = bit.lshift(1, 32) - 1 -- (1 << 32) - 1
+  exec(fmt("riverctl map normal Super 0 set-focused-tags %s", all_tags_mask))
+  exec(fmt("riverctl map normal Super+Shift 0 set-view-tags %s", all_tags_mask))
+end
 
-# auto starting apps
-bash $HOME/.config/river/process.sh
+-- Mappings for scratchpad tag management
+local function scratchpad_tag_mappings()
+  -- The scratchpad will live on an unused tag. Which tags are used depends on your
+  -- config, but rivers default uses the first 9 tags.
+  local scratch_tags = bit.lshift(1, 21)
 
-# Make certain views start floating
-riverctl float-filter-add app-id float
-riverctl float-filter-add app-id mpv-float
-riverctl float-filter-add app-id "lutris"
-riverctl float-filter-add title "popup title with spaces"
+  -- Toggle viewing the scratchpad on the current tag output with Super+S
+  exec(fmt("riverctl map normal Super S toggle-focused-tags %s", scratch_tags))
 
-# Set app-ids and titles of views which should use client side decorations
-riverctl csd-filter-add app-id "gedit"
-riverctl csd-filter-add app-id "firefox"
-riverctl csd-filter-add app-id "kitty"
-# Set touchpad by grabbing the event
-for pad in $(riverctl list-inputs | grep -i touchpad )
-do
-  riverctl input $pad events enabled
-  riverctl input $pad tap enabled
-done
+  -- Send view/window to the scratchpad with Super+Shift+S
+  exec(fmt("riverctl map normal Super+Shift S set-view-tags %s", scratch_tags))
 
-riverctl focus-follows-cursor normal
+  -- Set spawn tagmask to ensure new windows don't have the scratchpad tag unless explicitly set.
+  local all_but_scratch_tag = bit.bxor((bit.lshift(1, 32) - 1), scratch_tags)
+  exec(fmt("riverctl spawn-tagmask %s", all_but_scratch_tag))
+end
 
-# Set and exec into the default layout generator, rivertile.
-# River will send the process group of the init executable SIGTERM on exit.
-riverctl default-layout rivertile
-rivertile -view-padding 6 -outer-padding 6 -main-ratio 0.62 -main-location right &
+---@param tag number
+local function workspace(tag)
+  return bit.lshift(1, tag - 1)
+end
+
+local window_rules = {
+  ["-app-id"] = {
+    ["float"] = {
+      "popup",
+      "float",
+    },
+    ["csd"] = {
+      "firefox",
+    },
+    ["tags"] = {
+      { "firefox", workspace(2) },
+      { "mpv",     workspace(3) },
+    },
+  },
+  ["-title"] = {
+    ["float"] = {
+      "Extension*", -- fix extension page not floating
+      "Picture-in-Picture",
+      "About Mozilla*",
+      "Library*",
+    },
+    ["position"] = {
+      { "Picture-in-Picture", "0", "0" },
+    },
+  },
+}
+
+-- Window rules
+local function setup_window_rules(window_ui_rules)
+  local no_args = { "float", "no-float", "csd", "ssd", "fullscreen", "no-fullscreen" }
+  for rule_add_type, value in pairs(window_ui_rules) do
+    for action, items in pairs(value) do
+      if exists(action, no_args) then
+        for _, pattern in ipairs(items) do
+          exec(fmt("riverctl rule-add %s '%s' %s", rule_add_type, pattern, action))
+        end
+      else
+        for _, pattern_with_args in ipairs(items) do
+          exec(
+            fmt(
+              "riverctl rule-add %s '%s' %s %s",
+              rule_add_type,
+              pattern_with_args[1],
+              action,
+              cmd(pattern_with_args, nil, 2)
+            )
+          )
+        end
+      end
+    end
+  end
+end
+
+-- Apply settings ──
+run_autostarts(autostarts)
+configure_inputs(inputs)
+set_river_options(river_options)
+setup_window_rules(window_rules)
+setup_modes(modes)
+setup_user_modes(user_modes)
+set_gnome_settings(gsettings)
+setup_mappings(mappings)
+tag_mappings()
+scratchpad_tag_mappings()
+run_oneshots(oneshot_commands)
+
+-- Launch the layout generator as the final initial process.
+local ffi = require("ffi")
+ffi.cdef([[
+    int execlp(const char *filename, const char *arg, ... /*, (char *) NULL */);
+]])
+
+local execlp = ffi.C.execlp
+
+execlp(
+  "rivertile",
+  "rivertile",
+  "-view-padding",
+  "0",
+  "-outer-padding",
+  "0",
+  "-main-location",
+  "left",
+  "-main-count",
+  "1",
+  "-main-ratio",
+  "0.6"
+)
