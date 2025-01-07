@@ -2,6 +2,8 @@
 # Riverwm on Archlinux setup walkthrough (keep updating)
 ## Archlinux
 1. Install river & dependencies, decorations & gadgets
+
+
 ```
 neovim
 river
@@ -40,8 +42,8 @@ poppler(for PDF preview)
 ripgrep(for file content searching)
 zoxide(for historical directories navigation)
 imagemagick(for SVG, Font, HEIC, and JPEG XL preview)
-
 ```
+
 
 `power-profiles-daemon`
 `wf-recorder`
