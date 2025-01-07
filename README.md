@@ -47,6 +47,8 @@ imagemagick(for SVG, Font, HEIC, and JPEG XL preview)
 
 
 `#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"`
+
+
 `/etc/profile.d/editor.sh`
 
 
