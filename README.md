@@ -10,7 +10,6 @@ river
 ghostty
 fprintd(for fingerprint)
 git
-/etc/profile.d/editor.sh
 wl-clipboard
 cliphist
 fzf(for quick file subtree navigation)
@@ -30,7 +29,6 @@ wev
 fastfetch
 fcitx5-im
 fcitx5-rime
-#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"
 ttf-sarasa-gothic
 noto-fonts-emoji
 yazi
@@ -44,9 +42,13 @@ zoxide(for historical directories navigation)
 imagemagick(for SVG, Font, HEIC, and JPEG XL preview)
 ```
 
-
 `power-profiles-daemon`
 `wf-recorder`
+
+
+`#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"`
+`/etc/profile.d/editor.sh`
+
 
 2. Change keyboard layout:
 
