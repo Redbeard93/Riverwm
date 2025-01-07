@@ -98,7 +98,7 @@ local screenshot_path = HOME .. '/Pictures/Screenshots/Captura-de-pantalla-de_"$
 local max_volume = 1
 
 -- File manger
-local file_manager = "ranger"
+local file_manager = "yazi"
 
 -- Menu Launcher
 local desktop_launcher = fmt([[fuzzel --terminal "%s" --lines 25 --width 54 --show-actions]], terminal)
