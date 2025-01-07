@@ -2,12 +2,50 @@
 # Riverwm on Archlinux setup walkthrough (keep updating)
 ## Archlinux init
 1. Install river & dependencies:
-
-`sudo pacman -S river`
-
+```
 Install decorations & gadgets
-`river ghostty wl-clipboard cliphist grim slurp waybar brightnessctl kanshi waylock swayidle swaybg/wbg mako fuzzel wev fastfetch fcitx5-im fcitx5-rime ttf-sarasa-gothic noto-fonts-emoji yazi git fprintd fzf noto-fonts`
-`power-profiles-daemon wf-recorder`
+neovim
+river
+ghostty
+fprintd(for fingerprint)
+git
+/etc/profile.d/editor.sh
+wl-clipboard
+cliphist
+fzf(for quick file subtree navigation)
+firefox
+noto-fonts(for symbol)
+grim
+waybar
+brightnessctl
+kanshi
+slurp
+waylock
+swayidle
+swaybg/wbg
+mako
+fuzzel
+wev
+fastfetch
+fcitx5-im
+fcitx5-rime
+#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"
+ttf-sarasa-gothic
+noto-fonts-emoji
+yazi
+fd(for file searching)
+ffmpeg(for video thumbnails)
+p7zip(for archive extraction and preview)
+jq(for JSON preview)
+poppler(for PDF preview)
+ripgrep(for file content searching)
+zoxide(for historical directories navigation)
+imagemagick(for SVG, Font, HEIC, and JPEG XL preview)
+
+```
+
+`power-profiles-daemon`
+`wf-recorder`
 
 2. Change keyboard layout:
 
