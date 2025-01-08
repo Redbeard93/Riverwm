@@ -2,4 +2,4 @@ font-size = 16
 font-family = Sarasa Mono SC
 window-decoration = false
 background-opacity = 0.93
-background-blur-radius = 60
+background-blur-radius = 20
