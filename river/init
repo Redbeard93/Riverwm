@@ -118,8 +118,10 @@ local autostarts = {
     "before-sleep", waylock,
     "idlehint", "780",
   },
-  { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
-  --	{ "wbg", wallpaper },
+  { "swww-daemon" },
+  { "swww",       "img",     wallpaper },
+  -- { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
+  -- { "wbg", wallpaper },
   -- { status_bar }, # don't run status bar on startup
   { "fcitx5" },
   -- wlsunset -t 2500 -T 6500 -l 5.5502 -L -0.2174 -S 07:00 -s 18:00 -d 1800 -g 1.0
