@@ -177,7 +177,7 @@ end
 
 local river_options = {
   ["default-attach-mode"] = "bottom",
-  ["border-width"] = 1,
+  ["border-width"] = 0,
   ["focus-follows-cursor"] = "normal",
   ["hide-cursor"] = { "when-typing", "enabled" },
   ["set-cursor-warp"] = "on-output-change",
