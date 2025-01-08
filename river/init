@@ -104,7 +104,7 @@ local file_manager = "yazi"
 local desktop_launcher = fmt([[fuzzel --terminal "%s" --lines 25 --width 54 --show-actions]], terminal)
 local fuzzel_menu = fmt([[fuzzel --terminal "%s" --lines 25 --width 90 --dmenu]], terminal)
 
-local status_bar = "waybar pulse backlight battery"
+local status_bar = "waybar"
 
 local autostarts = {
   { "systemctl --user set-environment XDG_CURRENT_DESKTOP=river" },
@@ -114,15 +114,16 @@ local autostarts = {
   -- stylua: ignore
   {
     "swayidle", "-w",
-    "timeout", "300", waylock,
+    "timeout", "600", waylock,
     "before-sleep", waylock,
     "idlehint", "780",
   },
-  { "swww",       "img",     wallpaper },
+  { "swww",     "img",     wallpaper },
   { "wl-paste", "--watch", "cliphist", "store" },
   -- { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
-  -- { "wbg", wallpaper },
+  --	{ "wbg", wallpaper },
   -- { status_bar }, # don't run status bar on startup
+  -- wlsunset -t 2500 -T 6500 -l 5.5502 -L -0.2174 -S 07:00 -s 18:00 -d 1800 -g 1.0
   -- { "wlsunset", "-t 700", "-l 5.5502", "-L -0.2174" },
   -- { "batsignal", "-b", "-e", "-p", "-w 35", "-c 18", "-d 12", "-f 85", "-m 180", "-D systemctl suspend" },
 }
@@ -139,7 +140,6 @@ local oneshot_commands = {
   { "kanshi" },
   { "fcitx5" },
   { "swww-daemon" },
-  { "rivertile" },
 }
 
 -- run programs that need to be executed only once
@@ -176,8 +176,8 @@ local function configure_inputs(input_options)
 end
 
 local river_options = {
-  ["default-attach-mode"] = "top",
-  ["border-width"] = 0,
+  ["default-attach-mode"] = "bottom",
+  ["border-width"] = 1,
   ["focus-follows-cursor"] = "normal",
   ["hide-cursor"] = { "when-typing", "enabled" },
   ["set-cursor-warp"] = "on-output-change",
@@ -203,6 +203,7 @@ local gsettings = {
   },
   ["org.gnome.desktop.wm.preferences"] = {
     ["button-layout"] = "", -- Remove GTK window buttons
+  },
 }
 
 -- GNOME-related settings
@@ -866,7 +867,7 @@ ffi.cdef([[
 
 local execlp = ffi.C.execlp
 
-execlp(
+local ret = execlp(
   "rivertile",
   "rivertile",
   "-view-padding",
@@ -878,5 +879,22 @@ execlp(
   "-main-count",
   "1",
   "-main-ratio",
-  "0.6"
+  "0.6",
+  nil
 )
+
+if ret == -1 then
+  local errno = ffi.errno()
+  local error_message = "Failed to execute rivertile: " .. ffi.string(ffi.C.strerror(errno))
+
+  -- 打开文件，如果不存在则创建
+  local file_path = os.getenv("HOME") .. "/errorRivertil"
+  local file = io.open(file_path, "w")
+
+  if file then
+    file:write(error_message)
+    file:close()
+  else
+    print("Failed to open file for writing error message.")
+  end
+end
