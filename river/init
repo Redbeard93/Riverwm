@@ -118,6 +118,7 @@ local autostarts = {
     "before-sleep", waylock,
     "idlehint", "780",
   },
+  { "swww-daemon" },
   { "swww",       "img",     wallpaper },
   -- { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
   -- { "wbg", wallpaper },
@@ -138,7 +139,6 @@ end
 
 local oneshot_commands = {
   { "kanshi" },
-  { "swww-daemon" },
   { "fcitx5" },
 }
 
