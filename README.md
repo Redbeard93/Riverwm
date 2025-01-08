@@ -22,7 +22,7 @@ kanshi
 slurp
 waylock
 swayidle
-swaybg/wbg
+swww
 mako
 fuzzel
 wev
