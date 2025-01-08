@@ -5,3 +5,7 @@ patch:
     bindings:
       - { when: has_menu, accept: comma, send: Page_Up }
       - { when: has_menu, accept: period, send: Page_Down }
+  switches:
+    - name: ascii_mode
+      states: [ 中, Ａ ]
+      reset: 1
