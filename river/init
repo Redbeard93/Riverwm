@@ -202,6 +202,8 @@ local gsettings = {
     ["cursor-size"] = river_options["xcursor-theme"][2],
     ["color-scheme"] = "prefer-dark",
   },
+  ["org.gnome.desktop.wm.preferences"] = {
+    ["button-layout"] = "", -- Remove GTK window buttons
 }
 
 -- GNOME-related settings
