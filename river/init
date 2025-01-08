@@ -119,7 +119,6 @@ local autostarts = {
     "before-sleep", waylock,
     "idlehint", "780",
   },
-  { "swww-daemon" },
   { "swww",       "img",     wallpaper },
   -- { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
   -- { "wbg", wallpaper },
@@ -141,6 +140,7 @@ end
 local oneshot_commands = {
   { "kanshi" },
   { "fcitx5" },
+  { "swww-daemon" },
 }
 
 -- run programs that need to be executed only once
