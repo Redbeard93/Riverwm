@@ -110,7 +110,6 @@ local autostarts = {
   { "systemctl --user set-environment XDG_CURRENT_DESKTOP=river" },
   { "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" },
   { "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
-  { "rivertile" },
   -- Startup programs
   -- stylua: ignore
   {
@@ -140,6 +139,7 @@ local oneshot_commands = {
   { "kanshi" },
   { "fcitx5" },
   { "swww-daemon" },
+  { "rivertile" },
 }
 
 -- run programs that need to be executed only once
