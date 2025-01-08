@@ -90,7 +90,7 @@ local wallpaper = wallpapers_path .. popen("ls " .. wallpapers_path .. " | shuf 
 
 -- local lock_screen_wallpaper = wallpapers_path .. "Talk-Is-Cheap-Show-Me-The-Code.png"
 -- local swaylock = fmt([["swaylock --daemonize --image %s"]], lock_screen_wallpaper)
-local waylock = "waylock"
+local waylock = "waylock -init-color 0x000000"
 
 local screenshot_path = HOME .. '/Pictures/Screenshots/Captura-de-pantalla-de_"$(date +%F_%X)".png'
 
