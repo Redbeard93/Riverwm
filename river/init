@@ -152,7 +152,7 @@ local function run_oneshots(oneshot_programs)
 end
 
 local inputs = {
-  ["pointer-2-14-ETPS/2_Elantech_Touchpad"] = {
+  ["pointer-2362-628-PIXA3854:00_093A:0274_Touchpad"] = {
     ["events"] = "disabled-on-external-mouse",
     ["accel-profile"] = "adaptive",
     ["pointer-accel"] = "0.6",
