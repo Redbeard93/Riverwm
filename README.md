@@ -41,6 +41,9 @@ ripgrep(for file content searching)
 zoxide(for historical directories navigation)
 imagemagick(for SVG, Font, HEIC, and JPEG XL preview)
 mpv
+starship
+bluez
+bluez-utils
 ```
 
 `power-profiles-daemon`
