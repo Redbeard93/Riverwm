@@ -119,8 +119,8 @@ local autostarts = {
     "idlehint", "780",
   },
   { "swww-daemon" },
-  { "swww",     "img",     wallpaper },
-  { "wl-paste", "--watch", "cliphist", "store" },
+  { "swww",       "img",     wallpaper },
+  { "wl-paste",   "--watch", "cliphist", "store" },
   -- { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
   --	{ "wbg", wallpaper },
   -- { status_bar }, # don't run status bar on startup
@@ -149,30 +149,80 @@ local function run_oneshots(oneshot_programs)
   end
 end
 
-local inputs = {
-  ["pointer-2362-628-PIXA3854:00_093A:0274_Touchpad"] = {
-    ["events"] = "disabled-on-external-mouse",
-    ["accel-profile"] = "adaptive",
-    ["pointer-accel"] = "0.6",
-    ["click-method"] = "clickfinger",
-    ["drag"] = "enabled",
-    ["disable-while-typing"] = "enabled",
-    ["middle-emulation"] = "enabled",
-    ["natural-scroll"] = "enabled",
-    ["tap"] = "enabled",
-    ["tap-button-map"] = "left-right-middle",
-    ["scroll-method"] = "two-finger",
-  },
-}
+--Touchpad Settings
+local function log(message)
+  print(message)
+end
 
--- Configure input devices
-local function configure_inputs(input_options)
-  for device, options in pairs(input_options) do
-    for key, val in pairs(options) do
-      exec(fmt("riverctl input %s %s %s", device, key, val))
+local function execute_command(command)
+  local status = exec(command)
+  if status ~= 0 then
+    log(fmt("Error: Failed to execute '%s'", command))
+  end
+  return status
+end
+
+local function get_input_devices()
+  local handle = io.popen("riverctl list-inputs")
+  if not handle then
+    log("Error: Failed to execute 'riverctl list-inputs'")
+    return {}
+  end
+
+  local result = handle:read("*a")
+  handle:close()
+
+  if not result or result == "" then
+    log("Error: No input devices found.")
+    return {}
+  end
+
+  local devices = {}
+  for device in result:gmatch("[^\r\n]+") do
+    table.insert(devices, device)
+  end
+  return devices
+end
+
+local function filter_touchpads(devices)
+  local touchpads = {}
+  for _, device in ipairs(devices) do
+    if device:lower():match("touchpad") then
+      table.insert(touchpads, device)
     end
   end
+  return touchpads
 end
+
+local function configure_device(device, options)
+  log(fmt("Configuring device: %s", device))
+  for key, val in pairs(options) do
+    local command = fmt("riverctl input %s %s %s", device, key, val)
+    execute_command(command)
+  end
+end
+
+local function configure_inputs(input_options)
+  local devices = get_input_devices()
+  local touchpads = filter_touchpads(devices)
+  for _, device in ipairs(touchpads) do
+    configure_device(device, input_options)
+  end
+end
+
+local touchpad_options = {
+  ["events"] = "disabled-on-external-mouse",
+  ["accel-profile"] = "adaptive",
+  ["pointer-accel"] = "0.6",
+  ["click-method"] = "clickfinger",
+  ["drag"] = "enabled",
+  ["disable-while-typing"] = "enabled",
+  ["middle-emulation"] = "enabled",
+  ["natural-scroll"] = "enabled",
+  ["tap"] = "enabled",
+  ["tap-button-map"] = "left-right-middle",
+  ["scroll-method"] = "two-finger",
+}
 
 local river_options = {
   ["default-attach-mode"] = "bottom",
@@ -847,7 +897,7 @@ end
 
 -- Apply settings ──
 run_autostarts(autostarts)
-configure_inputs(inputs)
+configure_inputs(touchpad_options)
 set_river_options(river_options)
 setup_window_rules(window_rules)
 setup_modes(modes)
@@ -866,7 +916,7 @@ ffi.cdef([[
 
 local execlp = ffi.C.execlp
 
-local ret = execlp(
+execlp(
   "rivertile",
   "rivertile",
   "-view-padding",
@@ -881,19 +931,3 @@ local ret = execlp(
   "0.6",
   nil
 )
-
-if ret == -1 then
-  local errno = ffi.errno()
-  local error_message = "Failed to execute rivertile: " .. ffi.string(ffi.C.strerror(errno))
-
-  -- 打开文件，如果不存在则创建
-  local file_path = os.getenv("HOME") .. "/errorRivertil"
-  local file = io.open(file_path, "w")
-
-  if file then
-    file:write(error_message)
-    file:close()
-  else
-    print("Failed to open file for writing error message.")
-  end
-end
