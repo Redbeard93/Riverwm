@@ -1,4 +1,4 @@
-![alt text](https://github.com/EN-KS/Riverwm/blob/main/Tue-Sep-6-05:08:51-AM-CST-2022.png)
+![alt text](https://github.com/EN-KS/Riverwm/blob/main/)
 # Riverwm on Archlinux setup walkthrough (keep updating)
 ## Archlinux
 1. Install river & dependencies, decorations & gadgets
