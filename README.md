@@ -48,7 +48,7 @@ bluez-utils
 
 `power-profiles-daemon`
 `wf-recorder`
-
+`/etc/bluetooth/main.conf set AutoEnable=false`
 
 `#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"`
 
