@@ -1,0 +1,182 @@
+{
+  "layer": "top",
+  "modules-left": ["group/sysinfo","tray"],
+  "modules-center": ["river/tags"],
+  "modules-right": ["idle_inhibitor","wireplumber","network","battery","backlight","clock"],
+
+  "wireplumber": {
+    "format": "{icon}",
+    "tooltip-format": "{node_name} {volume}%",
+    "format-bluetooth": "{icon}󰂯",
+    "format-muted": "",
+    "format-icons": {
+      "headphone": "󰋋",
+      "headset": "󰋎",
+      "phone": "󰏲",
+      "portable": "",
+      "car": "󰄋",
+      "default": ["", "", ""]
+    },
+    "scroll-step": 1,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+
+  "river/tags": {
+    "num-tags": 8,
+    "tag-labels": [
+      "☰", // 乾卦，数字 1
+      "☱", // 兑卦，数字 2
+      "☲", // 离卦，数字 3
+      "☳", // 震卦，数字 4
+      "☴", // 巽卦，数字 5
+      "☵", // 坎卦，数字 6
+      "☶", // 艮卦，数字 7
+      "☷"  // 坤卦，数字 8
+    ]
+  },
+
+  "backlight": {
+    "format": "{icon}",
+    "format-icons": ["󰛩","󱩎","󱩏","󱩐","󱩑","󱩒","󱩓","󱩔","󱩕","󱩖","󰛨"],
+    "tooltip-format": "{percent}%",
+    "interval":1,
+    "on-scroll-up": "brightnessctl set 1%%+",
+    "on-scroll-down": "brightnessctl set 1%%-"
+  },
+
+"battery": {
+    "states": {
+      "warning": 10,
+      "critical": 6
+    },
+
+    "format": "{icon}",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-warning": "󰁺",
+    "format-critical": "󰂃",
+    "format-charging": "{icon}󱐋",
+    "tooltip-format": "{capacity}% {timeTo} Health:{health}%",
+    "tooltip-format-charging": "{capacity}% {timeTo} Health:{health}%",
+    "interval": 1
+  },
+
+  "tray":{
+    "icon-size":16,
+    "show-passive-items":true,
+    "spacing": 10
+  },
+
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%A, %B %d, %Y (%R)}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode"          : "year",
+      "mode-mon-col"  : 3,
+      "weeks-pos"     : "right",
+      "on-scroll"     : 1,
+      "format": {
+        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+
+    "actions":  {
+      "on-click-right": "mode",
+      "on-scroll-up": "tz_up",
+      "on-scroll-down": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+
+  "network": {
+    "interval": 5,
+    "format-wifi": "{icon}",
+    "format-icons": [
+      "󰤯", // 0%-20%
+      "󰤟", // 21%-40%
+      "󰤢", // 41%-60%
+      "󰤥", // 61%-80%
+      "󰤨"  // 81%-100%
+    ],
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+    "format-linked": "󰌹",
+    "format-alt": "{ifname}:{ipaddr}/{cidr}",
+    "on-click": "{ifname} {ipaddr}",
+    "on-click-right": "ghostty -e iwctl"
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󱎴",
+      "deactivated": "󰈉"
+    }
+  },
+
+"group/sysinfo": {
+    "orientation": "inherit",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "others",
+        "transition-left-to-right": true,
+    },
+    "modules": [
+        "temperature", // First element is the "group leader" and won't ever be hidden
+        "cpu",
+        "memory",
+        "disk",
+    ]
+},
+
+  "temperature": {
+    "critical-threshold": 95,
+    "interval": 5,
+    "format-critical": "{icon}",
+    "format": "{icon}",
+    "format-icons": [
+      "", // Icon: temperature-empty
+      "", // Icon: temperature-quarter
+      "", // Icon: temperature-half
+      "", // Icon: temperature-three-quarters
+      ""  // Icon: temperature-full
+    ],
+    "tooltip-format": "{temperatureC}°C"
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": "",
+    "tooltip-format": "{free} out of {total} available",
+    "unit": "GB",
+    // 0.25 GB out of 2000.00 GB available. Alternatively 241.3MiB out of 1.9TiB available.
+  },
+
+  "cpu": {
+    "interval": 30,
+    "format": "",
+    "max-length": 10,
+    "states": {
+      "warning": 70,
+      "critical": 90
+    }
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": "",
+    "max-length": 10,
+    "states": {
+      "warning": 70,
+      "critical": 90
+    }
+  },
+}
