@@ -74,24 +74,21 @@ end
 
 -- Set Variables
 
--- variable to store virtual terminal number
---local vtnr = getenv("XDG_VTNR")
-
 -- Your preferred terminal
--- local terminal = "kitty --single-instance  --instance-group " .. vtnr
 local terminal = "ghostty"
 
 local HOME = getenv("HOME")
+local RIVERCFG = HOME .. "/.config/river/"
 
 -- Path to a collection of wallpapers
-local wallpapers_path = HOME .. "/.config/river/wallpapers/"
+local wallpapers_path = RIVERCFG .. "wallpapers/"
 
 local wallpaper = wallpapers_path .. popen("ls " .. wallpapers_path .. " | shuf -n 1")
 
--- local lock_screen_wallpaper = wallpapers_path .. "Talk-Is-Cheap-Show-Me-The-Code.png"
--- local swaylock = fmt([["swaylock --daemonize --image %s"]], lock_screen_wallpaper)
-local waylock = "waylock -init-color 0x000000"
+-- Screenlock
+local waylock = "waylock"
 
+-- Screenshots
 local screenshot_path = HOME .. '/Pictures/Screenshots/Captura-de-pantalla-de_"$(date +%F_%X)".png'
 
 -- wpctl's -l flag is to prevent the volume from exceeding/surpass 160% == 1.6
@@ -104,8 +101,13 @@ local file_manager = "yazi"
 local desktop_launcher = fmt([[fuzzel --terminal "%s" --lines 25 --width 54 --show-actions]], terminal)
 local fuzzel_menu = fmt([[fuzzel --terminal "%s" --lines 25 --width 90 --dmenu]], terminal)
 
-local status_bar = "waybar"
+-- Statusbar
+local waybar_cmd = "waybar"
+local waybar_config = RIVERCFG .. "statusbar/waybar/config.json"
+local waybar_style = RIVERCFG .. "statusbar/waybar/river_style.css"
+local status_bar_cmd = fmt("%s -c %s -s %s", waybar_cmd, waybar_config, waybar_style)
 
+-- Autocommands
 local autostarts = {
   { "systemctl --user set-environment XDG_CURRENT_DESKTOP=river" },
   { "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" },
@@ -114,18 +116,14 @@ local autostarts = {
   -- stylua: ignore
   {
     "swayidle", "-w",
-    "timeout", "600", waylock,
+    "timeout", "300", waylock,
     "before-sleep", waylock,
     "idlehint", "780",
   },
   { "swww-daemon" },
   { "swww",       "img",     wallpaper },
   { "wl-paste",   "--watch", "cliphist", "store" },
-  -- { "swaybg",   "--mode",  "fill",     "--image", wallpaper },
-  --	{ "wbg", wallpaper },
   -- { status_bar }, # don't run status bar on startup
-  -- { "wlsunset", "-t 700", "-l 5.5502", "-L -0.2174" },
-  -- { "batsignal", "-b", "-e", "-p", "-w 35", "-c 18", "-d 12", "-f 85", "-m 180", "-D systemctl suspend" },
 }
 
 -- Run startup commands
@@ -224,6 +222,7 @@ local touchpad_options = {
   ["scroll-method"] = "two-finger",
 }
 
+-- River Options
 local river_options = {
   ["default-attach-mode"] = "bottom",
   ["border-width"] = 0,
@@ -289,6 +288,7 @@ local mappings = {
           [['makoctl dismiss --all']],
         },
       },
+      -- Reload river config file
       {
         mod = { "Super" },
         key = "R",
@@ -297,6 +297,7 @@ local mappings = {
           [[~/.config/river/init]],
         },
       },
+      -- Spawn yazi
       {
         mod = { "Super" },
         key = "E",
@@ -378,9 +379,9 @@ local mappings = {
           "spawn",
           fmt(
             [["if pgrep %s ; then pkill %s ; else %s & fi"]],
-            string.match(status_bar, "^%w+"),
-            string.match(status_bar, "^%w+"),
-            status_bar
+            waybar_cmd,
+            waybar_cmd,
+            status_bar_cmd
           ),
         },
       },
