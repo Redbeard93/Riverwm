@@ -30,7 +30,7 @@ fcitx5-im
 fcitx5-rime
 wqy-zenhei(for waybar tags)
 ttf-sarasa-gothic(for coding with chinese)
-noto-fonts(for symbol)
+ttf-noto-nerd(for symbols)
 noto-fonts-emoji
 yazi
 fd(for file searching)
