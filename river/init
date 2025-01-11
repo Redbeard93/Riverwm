@@ -378,7 +378,7 @@ local mappings = {
         command = {
           "spawn",
           fmt(
-            [["if pgrep %s ; then pkill %s ; else %s & fi"]],
+            [["if pgrep -x '%s' > /dev/null; then pkill -x '%s'; else %s & fi"]],
             waybar_cmd,
             waybar_cmd,
             status_bar_cmd
