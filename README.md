@@ -31,7 +31,7 @@ fcitx5-rime
 wqy-zenhei(for waybar tags)
 ttf-sarasa-gothic(for coding with chinese)
 ttf-noto-nerd(for symbols)
-noto-fonts-emoji
+noto-fonts-emoji(for rime)
 yazi
 fd(for file searching)
 ffmpeg(for video thumbnails)
