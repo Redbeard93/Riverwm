@@ -14,7 +14,6 @@ wl-clipboard
 cliphist
 fzf(for quick file subtree navigation)
 firefox
-noto-fonts(for symbol)
 grim
 waybar
 brightnessctl
@@ -29,7 +28,9 @@ wev
 fastfetch
 fcitx5-im
 fcitx5-rime
-ttf-sarasa-gothic
+wqy-zenhei(for waybar tags)
+ttf-sarasa-gothic(for coding with chinese)
+noto-fonts(for symbol)
 noto-fonts-emoji
 yazi
 fd(for file searching)
