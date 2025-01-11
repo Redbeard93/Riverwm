@@ -13,7 +13,7 @@ git
 wl-clipboard
 cliphist
 fzf(for quick file subtree navigation)
-firefox
+firefox(noto-fonts for rime infinite symbols)
 grim
 waybar
 brightnessctl
