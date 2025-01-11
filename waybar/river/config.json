@@ -55,8 +55,9 @@
     "format-warning": "󰁺",
     "format-critical": "󰂃",
     "format-charging": "{icon}󱐋",
-    "tooltip-format": "{capacity}% {timeTo} Health:{health}%",
-    "tooltip-format-charging": "{capacity}% {timeTo} Health:{health}%",
+    "format-plugged": "󰚥",
+    "tooltip-format": "{capacity}% {timeTo} Health:{health}% Cycles:{cycles}",
+    "tooltip-format-charging": "{capacity}% {timeTo} Health:{health}% Cycles:{cycles}",
     "interval": 1
   },
 
