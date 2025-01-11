@@ -29,7 +29,6 @@ fastfetch
 fcitx5-im
 fcitx5-rime
 wqy-zenhei(for waybar tags)
-ttf-sarasa-gothic(for coding with chinese)
 ttf-noto-nerd(for symbols)
 noto-fonts-emoji(for rime)
 yazi
