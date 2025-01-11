@@ -1,0 +1,328 @@
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+
+@keyframes blink {
+  to {
+    background-color: transparent;
+    color: #BF616A;
+  }
+}
+
+@keyframes blink-warning {
+  70% {
+    color: orange;
+  }
+
+  to {
+    color: #7f7f7f;
+    background-color: transparent;
+  }
+}
+
+@keyframes blink-critical {
+  70% {
+    color: red;
+  }
+
+  to {
+    color: #7f7f7f;
+    background-color: red;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * Base styles
+ * -------------------------------------------------------------------------- */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "WenQuanYi Zen Hei Mono, Symbols Nerd Font";
+  font-size: 18px;
+  min-height: 24px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#window {
+  margin-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  color: transparent;
+  background: transparent;
+}
+
+#tags {
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  background: transparent;
+}
+
+#tags button {
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#tags button.occupied {
+  transition: none;
+  color: #000000;
+  background: transparent;
+}
+
+#tags button.focused {
+  transition: none;
+  color: #ffffff;
+  background: transparent;
+  font-size: 16px;
+}
+
+#tags button:hover {
+  transition: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: transparent;
+  border-color: transparent;
+  color: #ffff99;
+}
+
+#tags button.focused:hover {
+  color: #7f7fff;
+  background: transparent;
+  transition: none;
+}
+
+#network {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: none;
+}
+
+#network.disconnected {
+  color: #7f7f7f;
+}
+
+#temperature {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  margin-bottom: 0px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#temperature.critical {
+  color: red;
+}
+
+#wireplumber {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#battery {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.charging, #battery.plugged {
+  color: #7f7f7f;
+  background-color: transparent;
+}
+
+#battery.warning:not(.charging) {
+  background-color: transparent;
+  color: orange;
+  animation-name: blink-warning;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+  background-color: transparent;
+  color: red;
+  animation-name: blink;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#backlight {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+#clock {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#memory {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  margin-bottom: 0px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#memory.warning {
+  color: orange;
+  background: transparent;
+  animation-name: blink-warning;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#memory.critical {
+  color: red;
+  background: transparent;
+  animation-name: blink-critical;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#cpu {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  margin-bottom: 0px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#cpu.warning {
+  color: orange;
+  background: transparent;
+}
+
+#cpu.critical {
+  color: red;
+  background: transparent;
+}
+
+#disk {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  margin-bottom: 0px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#tray {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  margin-bottom: 0px;
+  padding-right: 10px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: none;
+}
+
+#custom-updates {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
+
+#custom-media {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: none;
+}
+
+#idle_inhibitor {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #7f7f7f;
+  background: transparent;
+}
