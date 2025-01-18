@@ -49,6 +49,7 @@ cups-pdf
 ntfs-3g
 libreoffice-fresh
 zathura
+zathura-pdf-poppler
 ```
 
 `power-profiles-daemon`
