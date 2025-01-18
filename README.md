@@ -64,16 +64,6 @@ zathura-pdf-poppler
 
 2. Change keyboard layout:
 
-I use halmak keyboard layout, for convenience, which is achieved by configuring us(dvorak) by hand(in my halmak repository).
-
-if use bash, put these two lines in `/etc/environment`
-
-```
-XKB_DEFAULT_LAYOUT='us(basic)'
-XKB_DEFAULT_OPTIONS=ctrl:swapcaps
-``` 
-
-
 > Set a permanent environment variable
 > 
 > In order to configure a new environment variable to be persistent, we’ll need to edit the Bash configuration files. This can be done through three different files, depending on exactly how you plan to access the environment variable.
@@ -132,11 +122,11 @@ check https://unix.stackexchange.com/questions/656328/libseat-backend-seatd-c70-
 
 5. git clone all files from this repo & put them under `$HOME/.config/`
 
-6. for IME, I use `fcitx5-im fcitx5-rime glfw-wayland`
+6. for IME, I use `fcitx5-im fcitx5-rime`
 
 7. To make  haikarainen/light work without sudo, add user to a secondary group----video group `sudo usermod -a -G video user`
 
-8. To use bluetooth Headset, install `pipewire pipewire-alsa pipewire-pulse bluez bluez-utils pavucontrol pamixer`  (in terms of using headphone plugin, in Pavucontrol interface, go to Configuration, select Pro Audio, restart applications, should be good to go (don`t know why it kind of work only that way))
+8. To use bluetooth Headset, install `pipewire pipewire-alsa pipewire-pulse bluez bluez-utils`  (in terms of using headphone plugin, in Pavucontrol interface, go to Configuration, select Pro Audio, restart applications, should be good to go (don`t know why it kind of work only that way))
 
 9. To make vbetool work without sudo password, add `ALL ALL=(ALL) NOPASSWD:/usr/bin/vbetool` at the bottom line of `/etc/sudoers`
 
@@ -246,8 +236,4 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
         
         ```
         in yuzu-xwayland.sh then in terminal run command `chmod u+x yuzu-xwayland.sh`
-
---------
-
-dont forget `sudo pacman -S samba` before installing battle.net
 
