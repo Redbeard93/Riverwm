@@ -44,6 +44,11 @@ mpv
 starship
 bluez
 bluez-utils
+cups
+cups-pdf
+ntfs-3g
+libreoffice-fresh
+zathura
 ```
 
 `power-profiles-daemon`
