@@ -241,4 +241,7 @@ https://support.zoom.us/hc/en-us/articles/6634039380877-Sharing-your-screen-on-W
         ```
         in yuzu-xwayland.sh then in terminal run command `chmod u+x yuzu-xwayland.sh`
 
+--------
+
+dont forget `sudo pacman -S samba` before installing battle.net
 
