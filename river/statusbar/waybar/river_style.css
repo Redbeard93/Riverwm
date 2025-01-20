@@ -15,7 +15,7 @@
   }
 
   to {
-    color: #7f7f7f;
+    color: #9e9e9e;
     background-color: transparent;
   }
 }
@@ -26,7 +26,7 @@
   }
 
   to {
-    color: #7f7f7f;
+    color: #9e9e9e;
     background-color: red;
   }
 }
@@ -74,19 +74,19 @@ window#waybar.hidden {
 
 #tags button {
   transition: none;
-  color: #7f7f7f;
+  color: #808080;
   background: transparent;
 }
 
 #tags button.occupied {
   transition: none;
-  color: #000000;
+  color: #616161;
   background: transparent;
 }
 
 #tags button.focused {
   transition: none;
-  color: #ffffff;
+  color: #9e9e9e;
   background: transparent;
   font-size: 16px;
 }
@@ -97,11 +97,11 @@ window#waybar.hidden {
   text-shadow: inherit;
   color: transparent;
   border-color: transparent;
-  color: #ffff99;
+  color: #b8860b;
 }
 
 #tags button.focused:hover {
-  color: #7f7fff;
+  color: #ffd700;
   background: transparent;
   transition: none;
 }
@@ -114,12 +114,12 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: none;
 }
 
 #network.disconnected {
-  color: #7f7f7f;
+  color: #9e9e9e;
 }
 
 #temperature {
@@ -130,7 +130,7 @@ window#waybar.hidden {
   padding-right: 10px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -146,7 +146,7 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -158,7 +158,7 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -166,7 +166,7 @@ window#waybar.hidden {
 }
 
 #battery.charging, #battery.plugged {
-  color: #7f7f7f;
+  color: #9e9e9e;
   background-color: transparent;
 }
 
@@ -198,7 +198,7 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 #clock {
@@ -209,7 +209,7 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -221,7 +221,7 @@ window#waybar.hidden {
   padding-right: 10px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -253,7 +253,7 @@ window#waybar.hidden {
   padding-right: 10px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -275,7 +275,7 @@ window#waybar.hidden {
   padding-right: 10px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -287,7 +287,7 @@ window#waybar.hidden {
   padding-right: 10px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: none;
 }
 
@@ -299,7 +299,7 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
 
@@ -311,7 +311,7 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: none;
 }
 
@@ -323,6 +323,6 @@ window#waybar.hidden {
   margin-bottom: 0px;
   border-radius: 0px;
   transition: none;
-  color: #7f7f7f;
+  color: #9e9e9e;
   background: transparent;
 }
