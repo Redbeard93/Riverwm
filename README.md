@@ -63,7 +63,7 @@ zathura-pdf-poppler
 `#put-> EDITOR=nvim in /etc/environment to set yazi to open files via neovim globally ex.'sudo yazi'`
 
 
-Framework laptop should create `/etc/conf.d/wireless-regdom` then add`WIRELESS_REGDOM="US" to use wifi5G`
+Framework laptop should create `/etc/conf.d/wireless-regdom` then add`WIRELESS_REGDOM="US"` to use wifi5G
 
 
 2. Change keyboard layout:
