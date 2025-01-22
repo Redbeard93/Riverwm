@@ -56,10 +56,14 @@ zathura-pdf-poppler
 `wf-recorder`
 `/etc/bluetooth/main.conf set AutoEnable=false`
 
+
 `#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"`
 
 
 `#put-> EDITOR=nvim in /etc/environment to set yazi to open files via neovim globally ex.'sudo yazi'`
+
+
+Framework laptop should create `/etc/conf.d/wireless-regdom` then add`WIRELESS_REGDOM="US" to use wifi5G`
 
 
 2. Change keyboard layout:
