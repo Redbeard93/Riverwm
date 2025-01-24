@@ -97,11 +97,11 @@ window#waybar.hidden {
   text-shadow: inherit;
   color: transparent;
   border-color: transparent;
-  color: #b8860b;
+  color: #cebc86;
 }
 
 #tags button.focused:hover {
-  color: #ffd700;
+  color: #bf642f;
   background: transparent;
   transition: none;
 }
