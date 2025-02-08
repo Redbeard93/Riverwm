@@ -427,6 +427,13 @@ local mappings = {
         command = { "focus-output", "previous" },
       },
       -- Alt+Shift+{P,N} to send the focused view to next/previous available display output
+
+      --{
+      --  mod = "None",
+      --  key = "0x3E16", -- keysym for framework laptop 13 F9key which is Super_l + p, this p remains the same position on physical keyboard even with different keymaps. But setting like this doesn`t work so I just suspend this keymap for further research. Currently Super J works.
+      --  command = { "focus-output", "next" },
+      --},
+
       {
         mod = { "Super", "Shift" },
         key = "J",
