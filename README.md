@@ -18,6 +18,7 @@ grim
 waybar
 brightnessctl
 kanshi
+wlr-randr
 slurp
 waylock
 swayidle
@@ -50,7 +51,6 @@ ntfs-3g
 libreoffice-fresh
 zathura
 zathura-pdf-poppler
-wlr-randr
 ```
 
 `power-profiles-daemon`
