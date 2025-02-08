@@ -135,7 +135,6 @@ local function run_autostarts(autostart_commands)
 end
 
 local oneshot_commands = {
-  { "kanshi" },
   { "fcitx5" },
 }
 
