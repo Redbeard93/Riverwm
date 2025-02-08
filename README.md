@@ -17,7 +17,6 @@ firefox(noto-fonts for rime infinite symbols)
 grim
 waybar
 brightnessctl
-kanshi
 wlr-randr
 slurp
 waylock
