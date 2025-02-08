@@ -272,6 +272,15 @@ local mappings = {
   -- Key bindings
   map = {
     normal = {
+      -- Add the new keybinding to the mappings
+      {
+        mod = "Super",
+        key = "D",
+        command = {
+          "spawn",
+          [['wlr-randr --output eDP-1 --toggle']],
+        },
+      },
       -- Terminal
       {
         mod = "Super",
@@ -289,7 +298,7 @@ local mappings = {
       },
       -- Reload river config file
       {
-        mod = { "Super" },
+        mod = { "Super", "Shift" },
         key = "R",
         command = {
           "spawn",
@@ -314,7 +323,7 @@ local mappings = {
       -- Application launcher
       {
         mod = "Super",
-        key = "D",
+        key = "R",
         command = { "spawn", fmt([['%s']], desktop_launcher) },
       },
       -- Clipboard management with cliphist
@@ -407,13 +416,6 @@ local mappings = {
         command = { "swap", "previous" },
       },
       -- Alt+{P,N} to focus next/previous available display output
-
-      --{
-      --  mod = "None",
-      --  key = "0x3E16", -- keysym for framework laptop 13 F9key which is Super_l + p, this p remains the same position on physical keyboard even with different keymaps. But setting like this doesn`t work so I just suspend this keymap for further research. Currently Super J works.
-      --  command = { "focus-output", "next" },
-      --},
-
       {
         mod = "Super",
         key = "J",
