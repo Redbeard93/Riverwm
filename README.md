@@ -50,6 +50,7 @@ ntfs-3g
 libreoffice-fresh
 zathura
 zathura-pdf-poppler
+unzip
 ```
 
 `power-profiles-daemon`
