@@ -28,6 +28,7 @@ wev
 fastfetch
 fcitx5-im
 fcitx5-rime
+rime-frost-git
 wqy-zenhei(for waybar tags)
 ttf-noto-nerd(for symbols)
 noto-fonts-emoji(for rime)
@@ -51,6 +52,11 @@ libreoffice-fresh
 zathura
 zathura-pdf-poppler
 unzip
+openscad
+freecad
+lutris
+paru
+wechat
 ```
 
 `power-profiles-daemon`
