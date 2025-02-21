@@ -59,7 +59,7 @@ paru
 wechat
 ```
 
-`power-profiles-daemon`
+`power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
 `wf-recorder`
 `/etc/bluetooth/main.conf set AutoEnable=false`
 
