@@ -57,6 +57,7 @@ freecad
 lutris
 paru
 wechat
+htop
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
