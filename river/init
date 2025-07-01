@@ -871,8 +871,8 @@ local window_rules = {
       { "firefox", workspace(2) },
       { "mpv",     workspace(3) },
       { "steam", workspace(8) },
-			{ "dota2", workspace(8) },
-			{ "cs2", workspace(8) },
+      { "dota2", workspace(8) },
+      { "cs2", workspace(8) },
     },
   },
   ["-title"] = {
