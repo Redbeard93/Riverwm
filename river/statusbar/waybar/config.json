@@ -139,8 +139,8 @@
 },
 
   "temperature": {
-    "critical-threshold": 95,
-    "interval": 5,
+    "critical-threshold": 90,
+    "interval": 20,
     "format-critical": "{icon}",
     "format": "{icon}",
     "format-icons": [
