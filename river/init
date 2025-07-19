@@ -278,7 +278,7 @@ local mappings = {
         key = "D",
         command = {
           "spawn",
-          [['wlr-randr --output eDP-1 --toggle']],
+          [['wlopm --toggle eDP-1']],
         },
       },
       -- Terminal
