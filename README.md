@@ -18,6 +18,7 @@ grim
 waybar
 brightnessctl
 wlr-randr
+wlopm
 slurp
 waylock
 swayidle
