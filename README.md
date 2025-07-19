@@ -50,15 +50,19 @@ cups
 cups-pdf
 ntfs-3g
 libreoffice-fresh
+libreoffice-fresh-zh-tw
 zathura
 zathura-pdf-poppler
 unzip
 openscad
 freecad
 lutris
+wine-staging
 paru
 wechat
 htop
+power-profiles-daemon
+shotcut
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
