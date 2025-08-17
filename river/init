@@ -120,7 +120,6 @@ local autostarts = {
     "before-sleep", waylock,
     "idlehint", "780",
   },
-  { "swww-daemon" },
   { "swww",       "img",     wallpaper },
   { "wl-paste",   "--watch", "cliphist", "store" },
   -- { status_bar }, # don't run status bar on startup
