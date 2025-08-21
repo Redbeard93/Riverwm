@@ -63,6 +63,7 @@ wechat
 htop
 power-profiles-daemon
 shotcut
+fw-ectool-git(fancontrol)
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
