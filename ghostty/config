@@ -1,5 +1,6 @@
 font-size = 16
 font-family = NotoMono NFM
 window-decoration = false
+gtk-titlebar = false
 background-opacity = 0.93
 background-blur-radius = 20
