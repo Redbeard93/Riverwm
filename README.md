@@ -77,6 +77,9 @@ fw-ectool-git(fancontrol)
 `#put-> EDITOR=nvim in /etc/environment to set yazi to open files via neovim globally ex.'sudo yazi'`
 
 
+`to use swayidle properly, active `IdleAction and IdleActionSec` in etc/systemd/logind`
+
+
 Framework laptop should create `/etc/conf.d/wireless-regdom` then add`WIRELESS_REGDOM="US"` to use wifi5G
 
 
