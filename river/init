@@ -129,12 +129,6 @@ local autostarts = {
 	{ "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
   -- Startup programs
   -- stylua: ignore
-  {
-    "swayidle", "-w",
-    "timeout", "300", "wlopm", "--toggle", "DP-4",
-    "resume", "wlopm", "--toggle", "DP-4",
-    "idlehint", "900",
-  },
 	{ "swww", "img", wallpaper },
 	{ "wl-paste", "--watch", "cliphist", "store" },
 	-- { status_bar }, # don't run status bar on startup
