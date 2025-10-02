@@ -21,7 +21,6 @@ wlr-randr
 wlopm
 slurp
 waylock
-swayidle
 swww
 mako
 fuzzel
