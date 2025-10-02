@@ -102,7 +102,6 @@ local wallpaper = random_wallpaper(wallpaper_dir)
 
 -- Screenlock
 local waylock = "waylock"
-local dpms = "wlopm"
 
 -- Screenshots
 local screenshot_path = HOME .. '/Pictures/Screenshots/Captura-de-pantalla-de_"$(date +%F_%X)".png'
@@ -132,8 +131,8 @@ local autostarts = {
   -- stylua: ignore
   {
     "swayidle", "-w",
-    "timeout", "300", dpms, "off", "*",
-    "resume", dpms, "on", "*",
+    "timeout", "300", "wlopm", "--toggle", "DP-4",
+    "resume", "wlopm", "--toggle", "DP-4",
     "idlehint", "900",
   },
 	{ "swww", "img", wallpaper },
