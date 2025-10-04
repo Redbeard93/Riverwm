@@ -946,6 +946,20 @@ tag_mappings()
 scratchpad_tag_mappings()
 run_oneshots(oneshot_commands)
 
+-- 显示器电源管理功能
+local function setup_display_power_management()
+	-- 先终止可能存在的旧进程
+	os.execute("pkill swayidle")
+	-- 等待一秒确保进程完全终止
+	os.execute("sleep 1")
+	-- 启动新的 swayidle 进程
+	os.execute("swayidle -w timeout 300 'wlopm --off \"*\"' resume 'wlopm --on \"*\"' &")
+end
+
+-- 调用函数
+setup_display_power_management()
+
+
 -- Launch the layout generator as the final initial process.
 local ffi = require("ffi")
 ffi.cdef([[
