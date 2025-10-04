@@ -138,7 +138,7 @@ local autostarts = {
 ---@param autostart_commands table<table<string>>
 local function run_autostarts(autostart_commands)
 	for _, cmdline in ipairs(autostart_commands) do
-		spawn_once(cmd(cmdline))
+		exec(fmt([[riverctl spawn '%s']], cmd(cmdline)))
 	end
 end
 
