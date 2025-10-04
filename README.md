@@ -5,6 +5,7 @@
 
 
 ```
+bash-completion
 neovim
 river
 ghostty
@@ -31,8 +32,15 @@ fcitx5-im
 fcitx5-rime
 rime-frost-git
 wqy-zenhei(for waybar tags)
+wqy-microhei
 ttf-noto-nerd(for symbols)
 noto-fonts-emoji(for rime)
+ttf-roboto
+noto-fonts
+noto-fonts-cjk
+adobe-source-han-sans-cn-fonts
+adobe-source-han-serif-cn-fonts
+ttf-dejavu
 yazi
 fd(for file searching)
 ffmpeg(for video thumbnails)
@@ -60,10 +68,21 @@ lutris
 wine-staging
 paru
 wechat
-htop
 power-profiles-daemon
 shotcut
+mihomo
+htop
+piper(mouse)
 fw-ectool-git(fancontrol)
+tree-sitter-cli(nvim)
+luarocks(nvim)
+nodejs
+npm
+tectonic(nvim)
+mermaid-cli
+presenterm(slides)
+dmidecode(framework laptop bios check)
+fwupd(framework laptop bios update)
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
