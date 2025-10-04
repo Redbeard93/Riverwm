@@ -20,6 +20,7 @@ brightnessctl
 wlr-randr
 wlopm
 slurp
+swayidle
 waylock
 swww
 mako
