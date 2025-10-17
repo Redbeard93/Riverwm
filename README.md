@@ -67,7 +67,7 @@ freecad
 lutris
 wine-staging
 paru
-wechat
+wechat-bin
 power-profiles-daemon
 shotcut
 mihomo
