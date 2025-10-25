@@ -129,6 +129,7 @@ local autostarts = {
 	{ "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
   -- Startup programs
   -- stylua: ignore
+    { "systemctl --user start swww.service" },
 	{ "swww", "img", wallpaper },
 	{ "wl-paste", "--watch", "cliphist", "store" },
 	-- { status_bar }, # don't run status bar on startup
