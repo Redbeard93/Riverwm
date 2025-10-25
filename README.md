@@ -83,6 +83,9 @@ mermaid-cli
 presenterm(slides)
 dmidecode(framework laptop bios check)
 fwupd(framework laptop bios update)
+visual-studio-code-bin
+gnome-keyring(for vscode github authorization)
+docker
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
