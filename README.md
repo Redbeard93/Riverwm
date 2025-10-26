@@ -86,6 +86,7 @@ fwupd(framework laptop bios update)
 visual-studio-code-bin
 gnome-keyring(for vscode github authorization)
 docker
+docker-compose
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
