@@ -3,4 +3,3 @@ font-size = 16
 window-decoration = none
 gtk-titlebar = false
 background-opacity = 0.93
-background-blur-radius = 20
