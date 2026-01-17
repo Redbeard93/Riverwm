@@ -1,11 +1,14 @@
+# Archlinux需要下载 rime-ice-git
 patch:
+  # 引用「白霜拼音」配置: /usr/share/rime-data/rime_frost_suggestion.yaml
+  __include: rime_frost_suggestion:/
+  # 自定义配置
   schema_list:
     - schema: rime_frost
-  key_binder:
-    bindings:
-      - { when: has_menu, accept: comma, send: Page_Up }
-      - { when: has_menu, accept: period, send: Page_Down }
-  switches:
-    - name: ascii_mode
-      states: [ 中, Ａ ]
-      reset: 1
+    # 候选词个数
+  menu/page_size: 7
+    # 绑定键样式:「输入法模式-接收键-触发事件」
+  key_binder/bindings:
+      # 开启逗号句号翻页
+    - { when: paging, accept: comma, send: Page_Up }
+    - { when: has_menu, accept: period, send: Page_Down }
