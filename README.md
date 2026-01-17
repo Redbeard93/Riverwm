@@ -6,7 +6,7 @@
 
 ```
 bash-completion
-neovim
+neovim(#put-> export EDITOR='nvim' in /etc/environment)
 river
 ghostty
 fprintd(for fingerprint)
@@ -28,7 +28,7 @@ mako
 fuzzel
 wev
 fastfetch
-fcitx5-im
+fcitx5-im(#if use gnome3 do this command in cli: gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}")
 fcitx5-rime
 rime-frost-git
 wqy-zenhei(for waybar tags)
@@ -67,9 +67,10 @@ freecad
 lutris
 wine-staging
 paru
-wechat-bin
+wechat
 power-profiles-daemon
 shotcut
+kdenlive
 mihomo
 htop
 piper(mouse)
@@ -87,6 +88,8 @@ visual-studio-code-bin
 gnome-keyring(for vscode github authorization)
 docker
 docker-compose
+opencode-bin
+postman-bin(n8n)
 ```
 
 `power-profiles-daemon` `sudo systemctl enable power-profiles-daemon.service`
