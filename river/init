@@ -348,7 +348,7 @@ local mappings = {
 			},
 			-- Take screenshot of a window
 			{
-				mod = "None",
+				mod = "Super",
 				key = "Print",
 				command = {
 					"spawn",
@@ -357,11 +357,11 @@ local mappings = {
 			},
 			-- Take a screenshot of a region of a window
 			{
-				mod = "Super",
+				mod = "None",
 				key = "Print",
 				command = {
 					"spawn",
-					fmt([['grim -g "$(slurp)" %s']], screenshot_path),
+					fmt([['grim -g "$(slurp)" - | tee %s | wl-copy']], screenshot_path),
 				},
 			},
 			-- Take a screenshot of a region of a window and copy to clipboard
@@ -370,23 +370,17 @@ local mappings = {
 				key = "A",
 				command = {
 					"spawn",
-					fmt([['grim -g "$(slurp)" - | wl-copy ']]),
+					fmt([['grim -g "$(slurp)" - | tee %s | wl-copy']], screenshot_path),
 				},
 			},
 			-- Take screenshot of a window
 			{
-				mod = "Alt",
+				mod = { "Super", "Shift" },
 				key = "A",
 				command = {
 					"spawn",
 					fmt([['grim %s']], screenshot_path),
 				},
-			},
-			-- Take a screenshot and copy to clipboard
-			{
-				mod = "Alt",
-				key = "Print",
-				command = { "spawn", fmt([['grim - | wl-copy ']]) },
 			},
 			-- Super+Q to close the focused view
 			{
