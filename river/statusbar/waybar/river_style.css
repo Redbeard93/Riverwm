@@ -326,3 +326,15 @@ window#waybar.hidden {
   color: #9e9e9e;
   background: transparent;
 }
+
+#power-profiles-daemon {
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 0px;
+  transition: none;
+  color: #9e9e9e;
+  background: transparent;
+}
