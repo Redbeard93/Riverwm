@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "modules-left": ["group/sysinfo","tray"],
+  "modules-left": ["group/sysinfo","power-profiles-daemon","tray"],
   "modules-center": ["river/tags"],
   "modules-right": ["idle_inhibitor","wireplumber","network","battery","backlight","clock"],
 
@@ -139,8 +139,8 @@
 },
 
   "temperature": {
-    "critical-threshold": 90,
-    "interval": 20,
+    "critical-threshold": 80,
+    "interval": 10,
     "format-critical": "{icon}",
     "format": "{icon}",
     "format-icons": [
@@ -178,6 +178,18 @@
     "states": {
       "warning": 70,
       "critical": 90
+    }
+  },
+
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
     }
   },
 }
