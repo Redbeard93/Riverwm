@@ -44,7 +44,7 @@
     "on-scroll-down": "brightnessctl set 1%%-"
   },
 
-"battery": {
+  "battery": {
     "states": {
       "warning": 10,
       "critical": 6
@@ -123,21 +123,21 @@
     }
   },
 
-"group/sysinfo": {
+  "group/sysinfo": {
     "orientation": "inherit",
     "drawer": {
-        "transition-duration": 500,
-        "children-class": "others",
-        "transition-left-to-right": true,
+      "transition-duration": 500,
+      "children-class": "others",
+      "transition-left-to-right": true,
     },
     "modules": [
-        "power-profiles-daemon", // First element is the "group leader" and won't ever be hidden
-        "temperature",
-        "cpu",
-        "memory",
-        "disk",
+      "power-profiles-daemon", // First element is the "group leader" and won't ever be hidden
+      "temperature",
+      "cpu",
+      "memory",
+      "disk",
     ]
-},
+  },
 
   "temperature": {
     "critical-threshold": 80,
