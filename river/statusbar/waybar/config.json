@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "modules-left": ["group/sysinfo","power-profiles-daemon","tray"],
+  "modules-left": ["group/sysinfo","tray"],
   "modules-center": ["river/tags"],
   "modules-right": ["idle_inhibitor","wireplumber","network","battery","backlight","clock"],
 
@@ -131,7 +131,8 @@
         "transition-left-to-right": true,
     },
     "modules": [
-        "temperature", // First element is the "group leader" and won't ever be hidden
+        "power-profiles-daemon", // First element is the "group leader" and won't ever be hidden
+        "temperature",
         "cpu",
         "memory",
         "disk",
