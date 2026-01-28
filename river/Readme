@@ -13,6 +13,7 @@
 3. **进程隔离**：一个进程无法修改另一个运行中进程的环境变量
 
 
+用流程图总结：
 TTY Shell
 ↓ 继承环境
 RiverWM 主进程
@@ -37,10 +38,32 @@ os.execute("export XDG_CURRENT_DESKTOP=river")
     无法修改父进程（RiverWM）的环境
 
 
-# 解决办法：使用环境包装器启动river
+### 1.4 如果放在 autostarts 配置里：
 
 
-## 第一步：创建包装器文件~/.config/river/river-wrapper
+```
+local autostarts = {
+    { "export XDG_CURRENT_DESKTOP=river" },
+    { "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" },
+    { "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
+}
+
+-- 这是执行 autostarts 的函数
+local function run_autostarts(autostart_commands)
+    for _, cmdline in ipairs(autostart_commands) do
+        exec(fmt([[riverctl spawn '%s']], cmd(cmdline)))  -- 问题在这里！
+    end
+end
+```
+
+
+那么会产生另一个问题：riverctl spawn 会创建一个新的子进程来执行命令，这个子进程中的环境变量设置不会影响父进程（也就是您的 riverwm 会话）。
+
+
+## 二、解决办法：使用环境包装器启动river
+
+
+### 第一步：创建包装器文件~/.config/river/river-wrapper
 
 
 然后执行命令：`chmod +x ~/.config/river/river-wrapper`
@@ -72,6 +95,6 @@ os.execute("export XDG_CURRENT_DESKTOP=river")
                 会把脚本接收到的所有参数原封不动传递给river
 
 
-## 第二步：添加到 shell 配置文件，创建别名
+### 第二步：添加到 shell 配置文件，创建别名
 
 `echo "alias rw='~/.config/river/river-wrapper'" >> ~/.bashrc`
