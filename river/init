@@ -1,5 +1,6 @@
 #!/usr/bin/luajit
 
+local ffi = require("ffi")
 local getenv = os.getenv
 local fmt = string.format
 local exec = os.execute
@@ -266,7 +267,7 @@ local gsettings = {
 local function set_gnome_settings(gnome_settings)
 	for group, tbl in pairs(gnome_settings) do
 		for key, value in pairs(tbl) do
-			exec(fmt("gsettings set %s %s %s", group, key, value))
+			exec(fmt("gsettings set %s %s '%s'", group, key, value))
 		end
 	end
 end
@@ -956,7 +957,6 @@ setup_display_power_management()
 
 
 -- Launch the layout generator as the final initial process.
-local ffi = require("ffi")
 ffi.cdef([[
     int execlp(const char *filename, const char *arg, ... /*, (char *) NULL */);
 ]])
