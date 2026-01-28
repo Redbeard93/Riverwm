@@ -125,9 +125,9 @@ local status_bar_cmd = fmt("%s -c %s -s %s", waybar_cmd, waybar_config, waybar_s
 
 -- Autocommands
 local autostarts = {
-	{ "systemctl --user set-environment XDG_CURRENT_DESKTOP=river" },
-	{ "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" },
-	{ "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
+	{ "export XDG_CURRENT_DESKTOP=river" },
+	{ "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP" },
+	{ "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river" },
   -- Startup programs
   -- stylua: ignore
     { "systemctl --user start swww.service" },
