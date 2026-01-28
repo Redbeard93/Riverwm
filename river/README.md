@@ -97,4 +97,11 @@ end
 
 ### 第二步：添加到 shell 配置文件，创建别名
 
+
 `echo "alias rw='~/.config/river/river-wrapper'" >> ~/.bashrc`
+
+
+### 第三步：运行Riverwm的方式
+
+
+每次启动river时采用运行river-wrapper的方式启动，可以直接运行文件也可直接在bash 运行rw命令
